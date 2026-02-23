@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Втора Английска Гимназия - Официален уебсайт">
+  <title>Втора Английска Гимназия</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+  <!-- ========== HEADER & NAVIGATION ========== -->
+  <header class="site-header">
+    <div class="header-top">
+      <div class="container header-inner">
+        <a href="#начало" class="logo">
+          <img src="images/logo.png" alt="Лого - Втора Английска Гимназия" class="logo-img">
+        </a>
+        <nav class="main-nav" aria-label="Главно меню">
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <ul id="nav-menu" class="nav-menu">
+            <li><a href="#начало">Начало</a></li>
+            <li><a href="#седмична-програма">Програма</a></li>
+            <li><a href="#събития">Събития</a></li>
+            <li><a href="#постижения">Постижения</a></li>
+            <li><a href="#подкаст">Подкаст</a></li>
+            <li><a href="#родителски-срещи">Родителски срещи</a></li>
+            <li><a href="#училищен-парламент">Училищен парламент</a></li>
+            <li><a href="#благотворителни">Благотворителни инициативи</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- Banner -->
+    <div class="banner" id="начало">
+      <div class="banner-overlay"></div>
+      <div class="banner-content">
+        <h1>Втора английска езикова гимназия</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== СЕДМИЧНА ПРОГРАМА ========== -->
+    <section id="седмична-програма" class="section section-schedule">
+      <div class="container">
+        <h2 class="section-title">Седмична програма</h2>
+        <p class="section-intro">Учебната програма за учебната седмица</p>
+
+        <div class="schedule-selector-box">
+          <p class="schedule-selector-intro">Тук можете да прегледате седмичната програма по класове и паралелки. Изберете паралелка от съответния випуск, за да видите нейната учебна програма.</p>
+
+          <div class="schedule-select-row" aria-label="Избор на клас и паралелка">
+            <!-- 8 клас -->
+            <div class="schedule-select-group">
+              <span class="schedule-selector-label">8 клас</span>
+              <select class="schedule-select" data-grade-group="8">
+                <option value="">Избери паралелка…</option>
+                <option value="8a">8а</option>
+                <option value="8b">8б</option>
+                <option value="8c">8в</option>
+                <option value="8d">8г</option>
+                <option value="8e">8д</option>
+                <option value="8f">8е</option>
+                <option value="8g">8ж</option>
+              </select>
+            </div>
+
+            <!-- 9 клас -->
+            <div class="schedule-select-group">
+              <span class="schedule-selector-label">9 клас</span>
+              <select class="schedule-select" data-grade-group="9">
+                <option value="">Избери паралелка…</option>
+                <option value="9a">9а</option>
+                <option value="9b">9б</option>
+                <option value="9c">9в</option>
+                <option value="9d">9г</option>
+                <option value="9e">9д</option>
+                <option value="9f">9е</option>
+                <option value="9g">9ж</option>
+              </select>
+            </div>
+
+            <!-- 10 клас -->
+            <div class="schedule-select-group">
+              <span class="schedule-selector-label">10 клас</span>
+              <select class="schedule-select" data-grade-group="10">
+                <option value="">Избери паралелка…</option>
+                <option value="10a">10а</option>
+                <option value="10b">10б</option>
+                <option value="10c">10в</option>
+                <option value="10d">10г</option>
+                <option value="10e">10д</option>
+                <option value="10f">10е</option>
+                <option value="10g">10ж</option>
+              </select>
+            </div>
+
+            <!-- 11 клас -->
+            <div class="schedule-select-group">
+              <span class="schedule-selector-label">11 клас</span>
+              <select class="schedule-select" data-grade-group="11">
+                <option value="">Избери паралелка…</option>
+                <option value="11a">11а</option>
+                <option value="11b">11б</option>
+                <option value="11c">11в</option>
+                <option value="11d">11г</option>
+                <option value="11e">11д</option>
+                <option value="11f">11е</option>
+                <option value="11g">11ж</option>
+              </select>
+            </div>
+
+            <!-- 12 клас -->
+            <div class="schedule-select-group">
+              <span class="schedule-selector-label">12 клас</span>
+              <select class="schedule-select" data-grade-group="12">
+                <option value="">Избери паралелка…</option>
+                <option value="12a">12а</option>
+                <option value="12b">12б</option>
+                <option value="12c">12в</option>
+                <option value="12d">12г</option>
+                <option value="12e">12д</option>
+                <option value="12f">12е</option>
+                <option value="12g">12ж</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-tables">
+          <!-- 8а -->
+          <div class="schedule-table-grade active" data-grade="8a" aria-hidden="false">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead>
+                  <tr>
+                    <th>Час</th>
+                    <th>Понеделник</th>
+                    <th>Вторник</th>
+                    <th>Сряда</th>
+                    <th>Четвъртък</th>
+                    <th>Петък</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td><span class="cell-subject">Математика</span><span class="cell-room">101</span></td>
+                    <td><span class="cell-subject">Български език</span><span class="cell-room">102</span></td>
+                    <td><span class="cell-subject">Английски език</span><span class="cell-room">103</span></td>
+                    <td><span class="cell-subject">История</span><span class="cell-room">104</span></td>
+                    <td><span class="cell-subject">Информатика</span><span class="cell-room">105</span></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td><span class="cell-subject">Английски език</span><span class="cell-room">103</span></td>
+                    <td><span class="cell-subject">Математика</span><span class="cell-room">101</span></td>
+                    <td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td>
+                    <td><span class="cell-subject">География</span><span class="cell-room">202</span></td>
+                    <td><span class="cell-subject">Български език</span><span class="cell-room">102</span></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td><span class="cell-subject">История</span><span class="cell-room">104</span></td>
+                    <td><span class="cell-subject">Химия</span><span class="cell-room">203</span></td>
+                    <td><span class="cell-subject">Математика</span><span class="cell-room">101</span></td>
+                    <td><span class="cell-subject">Английски език</span><span class="cell-room">103</span></td>
+                    <td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td><span class="cell-subject">География</span><span class="cell-room">202</span></td>
+                    <td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td>
+                    <td><span class="cell-subject">Български език</span><span class="cell-room">102</span></td>
+                    <td><span class="cell-subject">Математика</span><span class="cell-room">101</span></td>
+                    <td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td><span class="cell-subject">Информатика</span><span class="cell-room">105</span></td>
+                    <td><span class="cell-subject">Английски език</span><span class="cell-room">103</span></td>
+                    <td><span class="cell-subject">Биология</span><span class="cell-room">204</span></td>
+                    <td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td>
+                    <td><span class="cell-subject">История</span><span class="cell-room">104</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- 8б–8ж -->
+          <div class="schedule-table-grade" data-grade="8b" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">111</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">112</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">113</span></td><td><span class="cell-subject">История</span><span class="cell-room">114</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">115</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">113</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">111</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">211</span></td><td><span class="cell-subject">География</span><span class="cell-room">212</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">112</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">114</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">213</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">111</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">113</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">212</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">211</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">112</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">111</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">115</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">113</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">214</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">114</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="8c" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">121</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">122</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">123</span></td><td><span class="cell-subject">История</span><span class="cell-room">124</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">125</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">123</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">121</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">122</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">124</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">203</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">121</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">123</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">122</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">121</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">125</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">123</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">204</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">124</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="8d" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">131</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">132</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">133</span></td><td><span class="cell-subject">История</span><span class="cell-room">134</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">135</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">133</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">131</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">132</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">134</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">203</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">131</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">133</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">132</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">131</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">135</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">133</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">204</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">134</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="8e" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">141</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">142</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">143</span></td><td><span class="cell-subject">История</span><span class="cell-room">144</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">145</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">143</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">141</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">142</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">144</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">203</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">141</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">143</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">142</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">141</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">145</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">143</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">204</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">144</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="8f" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">151</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">152</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">153</span></td><td><span class="cell-subject">История</span><span class="cell-room">154</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">155</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">153</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">151</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">152</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">154</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">203</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">151</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">153</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">152</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">151</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">155</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">153</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">204</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">154</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="8g" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">161</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">162</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">163</span></td><td><span class="cell-subject">История</span><span class="cell-room">164</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">165</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">163</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">161</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">162</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">164</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">203</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">161</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">163</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">202</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">201</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">162</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">161</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">165</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">163</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">204</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">164</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="9a" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">21001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">21002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">21003</span></td><td><span class="cell-subject">История</span><span class="cell-room">21004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">21005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">21003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">21001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">21101</span></td><td><span class="cell-subject">География</span><span class="cell-room">21102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">21002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">21004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">21103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">21001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">21003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">21102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">21101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">21002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">21001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">21005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">21003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">21104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">21004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="9b" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">22001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">22002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">22003</span></td><td><span class="cell-subject">История</span><span class="cell-room">22004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">22005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">22003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">22001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">22101</span></td><td><span class="cell-subject">География</span><span class="cell-room">22102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">22002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">22004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">22103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">22001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">22003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">22102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">22101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">22002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">22001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">22005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">22003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">22104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">22004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="9c" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">23001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">23002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">23003</span></td><td><span class="cell-subject">История</span><span class="cell-room">23004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">23005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">23003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">23001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">23101</span></td><td><span class="cell-subject">География</span><span class="cell-room">23102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">23002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">23004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">23103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">23001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">23003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">23102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">23101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">23002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">23001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">23005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">23003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">23104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">23004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="9d" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">24001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">24002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">24003</span></td><td><span class="cell-subject">История</span><span class="cell-room">24004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">24005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">24003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">24001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">24101</span></td><td><span class="cell-subject">География</span><span class="cell-room">24102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">24002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">24004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">24103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">24001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">24003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">24102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">24101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">24002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">24001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">24005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">24003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">24104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">24004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="9e" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">25001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">25002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">25003</span></td><td><span class="cell-subject">История</span><span class="cell-room">25004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">25005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">25003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">25001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">25101</span></td><td><span class="cell-subject">География</span><span class="cell-room">25102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">25002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">25004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">25103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">25001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">25003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">25102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">25101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">25002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">25001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">25005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">25003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">25104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">25004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="9f" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">26001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">26002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">26003</span></td><td><span class="cell-subject">История</span><span class="cell-room">26004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">26005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">26003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">26001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">26101</span></td><td><span class="cell-subject">География</span><span class="cell-room">26102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">26002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">26004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">26103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">26001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">26003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">26102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">26101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">26002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">26001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">26005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">26003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">26104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">26004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="9g" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">27001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">27002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">27003</span></td><td><span class="cell-subject">История</span><span class="cell-room">27004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">27005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">27003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">27001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">27101</span></td><td><span class="cell-subject">География</span><span class="cell-room">27102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">27002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">27004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">27103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">27001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">27003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">27102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">27101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">27002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">27001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">27005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">27003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">27104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">27004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="10a" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">31001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">31002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">31003</span></td><td><span class="cell-subject">История</span><span class="cell-room">31004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">31005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">31003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">31001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">31101</span></td><td><span class="cell-subject">География</span><span class="cell-room">31102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">31002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">31004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">31103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">31001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">31003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">31102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">31101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">31002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">31001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">31005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">31003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">31104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">31004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="10b" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">32001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">32002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">32003</span></td><td><span class="cell-subject">История</span><span class="cell-room">32004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">32005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">32003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">32001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">32101</span></td><td><span class="cell-subject">География</span><span class="cell-room">32102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">32002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">32004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">32103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">32001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">32003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">32102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">32101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">32002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">32001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">32005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">32003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">32104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">32004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="10c" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">33001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">33002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">33003</span></td><td><span class="cell-subject">История</span><span class="cell-room">33004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">33005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">33003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">33001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">33101</span></td><td><span class="cell-subject">География</span><span class="cell-room">33102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">33002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">33004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">33103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">33001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">33003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">33102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">33101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">33002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">33001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">33005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">33003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">33104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">33004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="10d" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">34001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">34002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">34003</span></td><td><span class="cell-subject">История</span><span class="cell-room">34004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">34005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">34003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">34001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">34101</span></td><td><span class="cell-subject">География</span><span class="cell-room">34102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">34002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">34004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">34103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">34001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">34003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">34102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">34101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">34002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">34001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">34005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">34003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">34104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">34004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="10e" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">35001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">35002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">35003</span></td><td><span class="cell-subject">История</span><span class="cell-room">35004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">35005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">35003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">35001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">35101</span></td><td><span class="cell-subject">География</span><span class="cell-room">35102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">35002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">35004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">35103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">35001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">35003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">35102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">35101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">35002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">35001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">35005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">35003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">35104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">35004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="10f" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">36001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">36002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">36003</span></td><td><span class="cell-subject">История</span><span class="cell-room">36004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">36005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">36003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">36001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">36101</span></td><td><span class="cell-subject">География</span><span class="cell-room">36102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">36002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">36004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">36103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">36001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">36003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">36102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">36101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">36002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">36001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">36005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">36003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">36104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">36004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="10g" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">37001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">37002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">37003</span></td><td><span class="cell-subject">История</span><span class="cell-room">37004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">37005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">37003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">37001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">37101</span></td><td><span class="cell-subject">География</span><span class="cell-room">37102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">37002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">37004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">37103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">37001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">37003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">37102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">37101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">37002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">37001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">37005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">37003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">37104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">37004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="11a" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">41001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">41002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">41003</span></td><td><span class="cell-subject">История</span><span class="cell-room">41004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">41005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">41003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">41001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">41101</span></td><td><span class="cell-subject">География</span><span class="cell-room">41102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">41002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">41004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">41103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">41001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">41003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">41102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">41101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">41002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">41001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">41005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">41003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">41104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">41004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="11b" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">42001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">42002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">42003</span></td><td><span class="cell-subject">История</span><span class="cell-room">42004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">42005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">42003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">42001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">42101</span></td><td><span class="cell-subject">География</span><span class="cell-room">42102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">42002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">42004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">42103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">42001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">42003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">42102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">42101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">42002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">42001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">42005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">42003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">42104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">42004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="11c" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">43001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">43002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">43003</span></td><td><span class="cell-subject">История</span><span class="cell-room">43004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">43005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">43003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">43001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">43101</span></td><td><span class="cell-subject">География</span><span class="cell-room">43102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">43002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">43004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">43103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">43001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">43003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">43102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">43101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">43002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">43001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">43005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">43003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">43104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">43004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="11d" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">44001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">44002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">44003</span></td><td><span class="cell-subject">История</span><span class="cell-room">44004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">44005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">44003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">44001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">44101</span></td><td><span class="cell-subject">География</span><span class="cell-room">44102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">44002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">44004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">44103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">44001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">44003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">44102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">44101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">44002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">44001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">44005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">44003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">44104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">44004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="11e" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">45001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">45002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">45003</span></td><td><span class="cell-subject">История</span><span class="cell-room">45004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">45005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">45003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">45001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">45101</span></td><td><span class="cell-subject">География</span><span class="cell-room">45102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">45002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">45004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">45103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">45001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">45003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">45102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">45101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">45002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">45001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">45005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">45003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">45104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">45004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="11f" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">46001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">46002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">46003</span></td><td><span class="cell-subject">История</span><span class="cell-room">46004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">46005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">46003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">46001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">46101</span></td><td><span class="cell-subject">География</span><span class="cell-room">46102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">46002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">46004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">46103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">46001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">46003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">46102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">46101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">46002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">46001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">46005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">46003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">46104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">46004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="11g" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">47001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">47002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">47003</span></td><td><span class="cell-subject">История</span><span class="cell-room">47004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">47005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">47003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">47001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">47101</span></td><td><span class="cell-subject">География</span><span class="cell-room">47102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">47002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">47004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">47103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">47001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">47003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">47102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">47101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">47002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">47001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">47005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">47003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">47104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">47004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="12a" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">51001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">51002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">51003</span></td><td><span class="cell-subject">История</span><span class="cell-room">51004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">51005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">51003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">51001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">51101</span></td><td><span class="cell-subject">География</span><span class="cell-room">51102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">51002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">51004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">51103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">51001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">51003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">51102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">51101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">51002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">51001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">51005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">51003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">51104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">51004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="12b" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">52001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">52002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">52003</span></td><td><span class="cell-subject">История</span><span class="cell-room">52004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">52005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">52003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">52001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">52101</span></td><td><span class="cell-subject">География</span><span class="cell-room">52102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">52002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">52004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">52103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">52001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">52003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">52102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">52101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">52002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">52001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">52005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">52003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">52104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">52004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="12c" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">53001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">53002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">53003</span></td><td><span class="cell-subject">История</span><span class="cell-room">53004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">53005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">53003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">53001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">53101</span></td><td><span class="cell-subject">География</span><span class="cell-room">53102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">53002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">53004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">53103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">53001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">53003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">53102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">53101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">53002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">53001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">53005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">53003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">53104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">53004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="12d" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">54001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">54002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">54003</span></td><td><span class="cell-subject">История</span><span class="cell-room">54004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">54005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">54003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">54001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">54101</span></td><td><span class="cell-subject">География</span><span class="cell-room">54102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">54002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">54004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">54103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">54001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">54003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">54102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">54101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">54002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">54001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">54005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">54003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">54104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">54004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="12e" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">55001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">55002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">55003</span></td><td><span class="cell-subject">История</span><span class="cell-room">55004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">55005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">55003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">55001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">55101</span></td><td><span class="cell-subject">География</span><span class="cell-room">55102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">55002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">55004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">55103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">55001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">55003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">55102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">55101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">55002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">55001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">55005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">55003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">55104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">55004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="12f" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">56001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">56002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">56003</span></td><td><span class="cell-subject">История</span><span class="cell-room">56004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">56005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">56003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">56001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">56101</span></td><td><span class="cell-subject">География</span><span class="cell-room">56102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">56002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">56004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">56103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">56001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">56003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">56102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">56101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">56002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">56001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">56005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">56003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">56104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">56004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="schedule-table-grade" data-grade="12g" aria-hidden="true">
+            <div class="table-wrapper">
+              <table class="schedule-table">
+                <thead><tr><th>Час</th><th>Понеделник</th><th>Вторник</th><th>Сряда</th><th>Четвъртък</th><th>Петък</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td><span class="cell-subject">Математика</span><span class="cell-room">57001</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">57002</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">57003</span></td><td><span class="cell-subject">История</span><span class="cell-room">57004</span></td><td><span class="cell-subject">Информатика</span><span class="cell-room">57005</span></td></tr>
+                  <tr><td>2</td><td><span class="cell-subject">Английски език</span><span class="cell-room">57003</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">57001</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">57101</span></td><td><span class="cell-subject">География</span><span class="cell-room">57102</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">57002</span></td></tr>
+                  <tr><td>3</td><td><span class="cell-subject">История</span><span class="cell-room">57004</span></td><td><span class="cell-subject">Химия</span><span class="cell-room">57103</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">57001</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">57003</span></td><td><span class="cell-subject">ФВС</span><span class="cell-room">зала</span></td></tr>
+                  <tr><td>4</td><td><span class="cell-subject">География</span><span class="cell-room">57102</span></td><td><span class="cell-subject">Физика</span><span class="cell-room">57101</span></td><td><span class="cell-subject">Български език</span><span class="cell-room">57002</span></td><td><span class="cell-subject">Математика</span><span class="cell-room">57001</span></td><td><span class="cell-subject">Музика</span><span class="cell-room">301</span></td></tr>
+                  <tr><td>5</td><td><span class="cell-subject">Информатика</span><span class="cell-room">57005</span></td><td><span class="cell-subject">Английски език</span><span class="cell-room">57003</span></td><td><span class="cell-subject">Биология</span><span class="cell-room">57104</span></td><td><span class="cell-subject">Изобразително изкуство</span><span class="cell-room">302</span></td><td><span class="cell-subject">История</span><span class="cell-room">57004</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== СЪБИТИЯ ========== -->
+    <section id="събития" class="section section-events">
+      <div class="container">
+        <h2 class="section-title" id="eventsHeader">Събития през месеца</h2>
+        <p class="section-intro">Актуални събития и мероприятия</p>
+        <div class="events-grid">
+          <article class="event-card">
+            <div class="event-date">
+              <span class="day">18</span>
+              <span class="month">ЯНУ</span>
+            </div>
+            <div class="event-body">
+              <h3>ДЕН НА ОТВОРЕНИТЕ ВРАТИ - 18.01.2026</h3>
+              <p>Присъединете се към нас и разгледайте училището, <br>срещнете преподавателите и учениците.</p>
+              <a href="#" class="btn btn-outline">Прочети повече</a>
+            </div>
+          </article>
+          <article class="event-card">
+            <div class="event-date">
+              <span class="day">16</span>
+              <span class="month">ФЕВ</span>
+            </div>
+            <div class="event-body">
+              <h3>НАЦИОНАЛНА ОЛИМПИАДА ПО МАТЕМАТИКА - 16.02.2026</h3>
+              <p>Учениците ни участват в регионалния кръг на олимпиадата по математика.</p>
+              <a href="#" class="btn btn-outline">Прочети повече</a>
+            </div>
+          </article>
+          <article class="event-card">
+            <div class="event-date">
+              <span class="day">21</span>
+              <span class="month">ФЕВ</span>
+            </div>
+            <div class="event-body">
+              <h3>ОЛИМПИАДАТА ПО АНГЛИЙСКИ ЕЗИК – 21.02.2026 Г.</h3>
+              <p>областният кръг на олимпиадата по английски език ще се проведе на 21.02.2026 г. (събота) от 09:00 ч.</p>
+              <a href="#" class="btn btn-outline">Прочети повече</a>
+            </div>
+          </article>
+          <article class="event-card">
+            <div class="event-date">
+              <span class="day">12</span>
+              <span class="month">Мар</span>
+            </div>
+            <div class="event-body">
+              <h3>ОЛИМПИАДА ПО ГРАЖДАНСКО ОБРАЗОВАНИЕ </h3>
+              <p>Олимпиадата по гражданско образование насърчава учениците да изразяват аргументирана позиция на актуални социални теми.</p>
+              <a href="#" class="btn btn-outline">Прочети повече</a>
+            </div>
+          </article>
+          <article class="event-card">
+            <div class="event-date">
+              <span class="day">15</span>
+              <span class="month">Апр</span>
+            </div>
+            <div class="event-body">
+              <h3>НАЦИОНАЛНА КОНФЕРЕНЦИЯ  ИТА - 15.04.2026 Г.</h3>
+              <p>Конференцията се провежда в университета ХТМУ от 15-17 април 2026 г. Учениците ни издават доклади и представят проекти в областта на ИТ и автоматизацията.</p>
+              <a href="#" class="btn btn-outline">Прочети повече</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ПОСТИЖЕНИЯ ========== -->
+    <section id="постижения" class="section section-achievements">
+      <div class="container">
+        <h2 class="section-title">Постижения</h2>
+        <p class="section-intro">Нашите успехи в олимпиади, състезания и проекти</p>
+        <div class="achievements-grid">
+          <article class="achievement-card reveal">
+            <div class="achievement-image achievement-image--english">
+              <div class="achievement-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="achievement-content">
+              <h3>Национална олимпиада по английски</h3>
+              <p>Ученици от гимназията вземат активно участие в националната олимпиада по английски език, демонстрирайки високо ниво на езикова подготовка</p>
+            </div>
+          </article>
+          <article class="achievement-card reveal">
+            <div class="achievement-image achievement-image--math">
+              <div class="achievement-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="achievement-content">
+              <h3>Математически състезания</h3>
+              <p>Представители на училището участват в математически състезания, където прилагат задълбочени знания, логическо мислене и умения за решаване на комплексни задачи.</p>
+            </div>
+          </article>
+          <article class="achievement-card reveal">
+            <div class="achievement-image achievement-image--conference">
+              <div class="achievement-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="achievement-content">
+              <h3>ИТ - състезания и конференции</h3>
+              <p>Учениците се включват в състезания и ученически конференции, представяйки проекти в областта на информационните технологии.</p>
+            </div>
+          </article>
+          <article class="achievement-card reveal">
+            <div class="achievement-image achievement-image--sport">
+              <div class="achievement-placeholder" aria-hidden="true"></div>
+            </div>
+            <div class="achievement-content">
+              <h3>Спортни постижения</h3>
+              <p>Спортните отбори на гимназията участват в ученически турнири, като развиват дисциплина и устойчивост в състезателна среда..</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ПОДКАСТ ========== -->
+    <section id="подкаст" class="section section-podcast">
+      <div class="container">
+        <h2 class="section-title">Подкаст</h2>
+        <p class="section-intro">Слушайте нашите разговори с ученици и преподаватели</p>
+        <div class="podcast-player">
+          <div class="podcast-current">
+            <div class="podcast-cover">
+              <span aria-hidden="true">🎙️</span>
+            </div>
+            <div class="podcast-info">
+              <h3>Епизод 5: Образованието след 2024</h3>
+              <p>Разговор с директора и ученици от висшите класове.</p>
+              <audio id="main-audio" controls>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                Вашият браузър не поддържа аудио елемента.
+              </audio>
+            </div>
+          </div>
+          <ul class="podcast-episodes">
+            <li class="episode-item">
+              <button type="button" class="episode-play" aria-label="Слушай епизод 1">
+                <span class="play-icon">▶</span>
+              </button>
+              <div class="episode-details">
+                <strong>Епизод 1: Запознай се с гимназията</strong>
+                <span>12 мин</span>
+              </div>
+            </li>
+            <li class="episode-item">
+              <button type="button" class="episode-play" aria-label="Слушай епизод 2">
+                <span class="play-icon">▶</span>
+              </button>
+              <div class="episode-details">
+                <strong>Епизод 2: Училищен парламент</strong>
+                <span>18 мин</span>
+              </div>
+            </li>
+            <li class="episode-item">
+              <button type="button" class="episode-play" aria-label="Слушай епизод 3">
+                <span class="play-icon">▶</span>
+              </button>
+              <div class="episode-details">
+                <strong>Епизод 3: Олимпиади и състезания</strong>
+                <span>15 мин</span>
+              </div>
+            </li>
+            <li class="episode-item">
+              <button type="button" class="episode-play" aria-label="Слушай епизод 4">
+                <span class="play-icon">▶</span>
+              </button>
+              <div class="episode-details">
+                <strong>Епизод 4: Благотворителност в училище</strong>
+                <span>22 мин</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== РОДИТЕЛСКИ СРЕЩИ ========== -->
+    <section id="родителски-срещи" class="section section-parent-meetings">
+      <div class="container">
+        <h2 class="section-title">Родителски срещи</h2>
+        <p class="section-intro">Предстоящи срещи с родители по класове</p>
+        <div class="parent-meetings-grid">
+          <article class="parent-meeting-card">
+            <span class="parent-meeting-class">8 клас</span>
+            <span class="parent-meeting-date">05.01.2026 г.</span>
+            <span class="parent-meeting-time">19:00 ч.</span>
+          </article>
+          <article class="parent-meeting-card">
+            <span class="parent-meeting-class">9 клас</span>
+            <span class="parent-meeting-date">08.01.2026 г.</span>
+            <span class="parent-meeting-time">18:00 ч.</span>
+          </article>
+          <article class="parent-meeting-card">
+            <span class="parent-meeting-class">10 клас</span>
+            <span class="parent-meeting-date">12.01.2026 г.</span>
+            <span class="parent-meeting-time">19:00 ч.</span>
+          </article>
+          <article class="parent-meeting-card">
+            <span class="parent-meeting-class">11 клас</span>
+            <span class="parent-meeting-date">15.01.2026 г.</span>
+            <span class="parent-meeting-time">18:30 ч.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== УЧИЛИЩЕН ПАРЛАМЕНТ ========== -->
+    <section id="училищен-парламент" class="section section-parliament">
+      <div class="container">
+        <h2 class="section-title">Училищен парламент</h2>
+        <p class="section-intro">Ученическият съвет – гласът на учениците</p>
+        <div class="parliament-grid">
+          <article class="parliament-card reveal">
+            <div class="parliament-avatar parliament-avatar-chair">П</div>
+            <h3>Председател</h3>
+            <p class="parliament-name">Мария Иванова</p>
+            <p>Координира дейностите на парламента и представлява учениците пред ръководството.</p>
+          </article>
+          <article class="parliament-card reveal">
+            <div class="parliament-avatar">И</div>
+            <h3>Член</h3>
+            <p class="parliament-name">Иван Петров</p>
+            <p>Отговорен за културните и спортни събития в училището.</p>
+          </article>
+          <article class="parliament-card reveal">
+            <div class="parliament-avatar">Е</div>
+            <h3>Член</h3>
+            <p class="parliament-name">Елена Георгиева</p>
+            <p>Работи по благотворителни инициативи и проекти.</p>
+          </article>
+          <article class="parliament-card reveal">
+            <div class="parliament-avatar">Д</div>
+            <h3>Член</h3>
+            <p class="parliament-name">Димитър Стоянов</p>
+            <p>Отговорен за комуникацията и медиите в училището.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== БЛАГОТВОРИТЕЛНИ ИНИЦИАТИВИ ========== -->
+    <section id="благотворителни" class="section section-charity">
+      <div class="container">
+        <h2 class="section-title">Благотворителни инициативи</h2>
+        <p class="section-intro">Нашите кампании и помощ към обществото</p>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <time class="timeline-date">Декември 2025</time>
+              <h3>Коледен благотворителен базар</h3>
+              <p>Учениците организираха базар с ръчно изработени подаръци, храни и други.<br> Събраните средства отиват за деца, които се нуждаят от помощ.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <time class="timeline-date">Януари 2026</time>
+              <h3>Untitled</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam consequuntur eveniet cupiditate recusandae quod nam aliquid facere ut incidunt iure, odit modi.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <time class="timeline-date">Февруари 2026</time>
+              <h3>Untitled</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam consequuntur eveniet cupiditate recusandae quod nam aliquid facere ut incidunt iure, odit modi.</p>
+            </div>
+          </article>
+          <article class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <time class="timeline-date">Март 2026</time>
+              <h3>Untitled</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam consequuntur eveniet cupiditate recusandae quod nam aliquid facere ut incidunt iure, odit modi.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-block">
+          <h3>Контакти</h3>
+          <address>
+            <p><strong>Адрес:</strong> ж.к. Стрелбище, ул. „Траянова врата” 26, София</p>
+            <p><strong>Телефон:</strong> <a href="tel:+359 888 19 24 59"></a>+359 888 19 24 59</p>
+            <p><strong>Email:</strong> <a href="mailto:2els.Sofia@2els.com">2els.Sofia@2els.com</a></p>
+          </address>
+        </div>
+        <div class="footer-block">
+          <h3>Социални мрежи</h3>
+          <div class="social-links">
+            <a href="https://www.facebook.com/people/Втора-английска-езикова-гимназия-Томас-Джеферсън/61582543824237/" target="_blank" aria-label="Facebook">Facebook</a>
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="YouTube">YouTube</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Втора Английска Гимназия. Всички права запазени.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script type="module" src="script.js"></script>
+
+
+</body>
+</html>

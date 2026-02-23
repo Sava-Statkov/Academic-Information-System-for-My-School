@@ -1,0 +1,13 @@
+Open terminal in folder:
+python3 -m http.server 8000
+
+Open browser with:
+http://localhost:8000/index.html
+
+Add new school program:
+http://localhost:8000/import.html
+Click add csv and select your csv spreadsheet
+
+Make sure the csv file content is according to the text formatting requirements.
+Reload the website after updating features.
+If it doesn't work refresh the web app with the commands in line 2 and 5.

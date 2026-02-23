@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Schedule CSV</title>
+</head>
+<body>
+
+<h1>Upload Schedule CSV</h1>
+<input type="file" id="csvFile" accept=".csv" />
+<button id="uploadBtn">Upload to Firestore</button>
+
+<script type="module">
+
+import { writeScheduleDoc } from './firebase.js';
+
+// Keep Bulgarian day names as canonical keys when writing to Firestore
+const bgDays = ['Понеделник','Вторник','Сряда','Четвъртък','Петък'];
+
+// Importer-specific mapping: Bulgarian letters -> Latin letters (alphabet index mapping)
+function mapImporterClassToFirestoreId(cls) {
+  if (!cls) return '';
+  const s = String(cls).trim().toLowerCase();
+  const m = s.match(/^(\d+)\s*([а-яё]+)$/i);
+  if (!m) return String(cls).trim().toUpperCase();
+  const num = m[1];
+  const letter = m[2][0];
+  const map = {
+    'а': 'A',
+    'б': 'B',
+    'в': 'C',
+    'г': 'D',
+    'д': 'E',
+    'е': 'F',
+    'ж': 'G'
+  };
+  const mapped = map[letter] || letter.toUpperCase();
+  return (num + mapped).toUpperCase();
+}
+
+document.getElementById("uploadBtn").addEventListener("click", async () => {
+  const fileInput = document.getElementById("csvFile");
+  const file = fileInput.files[0];
+
+  if (!file) {
+    alert("Please select CSV file");
+    return;
+  }
+
+  const text = await file.text();
+  const rows = text.split("\n").map(r => r.trim()).filter(r => r.length);
+
+  const header = rows.shift().split(",");
+
+  const data = {};
+
+  rows.forEach(row => {
+    if (!row.trim()) return;
+    const columns = row.split(",").map(c => c.trim());
+    if (columns.length < 5) return;
+
+    let [cls, dayBg, periodStr, subject, room, teacher] = columns;
+
+    if (!bgDays.includes(dayBg)) return; // require Bulgarian day name
+
+    const period = parseInt(periodStr, 10) - 1;
+    if (isNaN(period) || period < 0 || period > 6) return;
+
+    const normalizedClass = mapImporterClassToFirestoreId(cls || '');
+    if (!data[normalizedClass]) {
+      data[normalizedClass] = {};
+      bgDays.forEach(d => data[normalizedClass][d] = Array.from({ length: 7 }, () => ({ subject: '', room: '', teacher: '' })));
+    }
+
+    data[normalizedClass][dayBg][period] = { subject: subject || '', room: room || '', teacher: teacher || '' };
+  });
+
+  for (const classId in data) {
+    try {
+      await writeScheduleDoc(classId, data[classId]);
+      console.log('Uploaded:', classId);
+    } catch (err) {
+      console.error('Failed to upload', classId, err);
+    }
+  }
+
+  alert('Upload complete. Check Firestore.');
+});
+
+</script>
+</body>
+</html>
