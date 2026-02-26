@@ -13,47 +13,52 @@
 
 
 <body>
-  <!-- ========== HEADER & NAVIGATION ========== -->
-  <header class="site-header">
-    <div class="header-top">
-      <div class="container header-inner">
-        <a href="#начало" class="logo">
-          <img src="images/logo.png" alt="Лого - Втора Английска Гимназия" class="logo-img">
-        </a>
-        <nav class="main-nav" aria-label="Главно меню">
-          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-          <ul id="nav-menu" class="nav-menu">
-            <li><a href="#начало">Начало</a></li>
-            <li><a href="#седмична-програма">Програма</a></li>
-            <li><a href="#събития">Събития</a></li>
-            <li><a href="#постижения">Постижения</a></li>
-            <li><a href="#подкаст">Подкаст</a></li>
-            <li><a href="#родителски-срещи">Родителски срещи</a></li>
-            <li><a href="#училищен-парламент">Училищен парламент</a></li>
-            <li><a href="#благотворителни">Благотворителни инициативи</a></li>
-          </ul>
-        </nav>
+  <div class="site-shell">
+    <!-- ========== HEADER & NAVIGATION ========== -->
+    <header class="site-header">
+      <div class="header-top">
+        <div class="layout-container header-inner">
+          <div class="header-brand">
+            <a href="#начало" class="logo">
+              <img src="images/logo.png" alt="Лого - Втора Английска Гимназия" class="logo-img">
+            </a>
+          </div>
+          <div class="header-links">
+            <nav class="main-nav" aria-label="Главно меню">
+              <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+              <ul id="nav-menu" class="nav-menu">
+                <li><a href="#начало">Начало</a></li>
+                <li><a href="#седмична-програма">Програма</a></li>
+                <li><a href="#събития">Събития</a></li>
+                <li><a href="#постижения">Постижения</a></li>
+                <li><a href="#подкаст">Подкаст</a></li>
+                <li><a href="#родителски-срещи">Родителски срещи</a></li>
+                <li><a href="#училищен-парламент">Училищен парламент</a></li>
+                <li><a href="#благотворителни">Благотворителни инициативи</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- Banner -->
-    <div class="banner" id="начало">
-      <div class="banner-overlay"></div>
-      <div class="banner-content">
-        <h1>Втора английска езикова гимназия</h1>
+      <!-- Banner -->
+      <div class="banner" id="начало">
+        <div class="banner-overlay"></div>
+        <div class="banner-content layout-container">
+          <h1>Втора английска езикова гимназия</h1>
+        </div>
       </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- ========== СЕДМИЧНА ПРОГРАМА ========== -->
-    <section id="седмична-програма" class="section section-schedule">
-      <div class="container">
-        <h2 class="section-title">Седмична програма</h2>
-        <p class="section-intro">Учебната програма за учебната седмица</p>
+    </header>
+    <main class="main-content">
+      <div class="layout-container">
+        <!-- ========== СЕДМИЧНА ПРОГРАМА ========== -->
+        <section id="седмична-програма" class="section section-schedule">
+          <div class="container">
+            <h2 class="section-title">Седмична програма</h2>
+            <p class="section-intro">Учебната програма за учебната седмица</p>
 
         <div class="schedule-selector-box">
           <p class="schedule-selector-intro">Тук можете да прегледате седмичната програма по класове и паралелки. Изберете паралелка от съответния випуск, за да видите нейната учебна програма.</p>
@@ -682,15 +687,16 @@
       <div class="container">
         <h2 class="section-title" id="eventsHeader">Събития през месеца</h2>
         <p class="section-intro">Актуални събития и мероприятия</p>
-        <div class="calendar-wrapper">
-          <div class="calendar-container">
-            <div id="calendar-root" class="calendar"></div>
-            <div id="calendar-event-details"></div>
+        <div class="events-layout">
+          <div class="calendar-wrapper">
+            <div class="calendar-container">
+              <div id="calendar-root" class="calendar"></div>
+              <div id="calendar-event-details"></div>
+            </div>
           </div>
-        </div>
-        <div class="events-cards">
-          <div class="event-card">
-            <div class="event-date">
+          <div class="events-cards">
+            <div class="event-card">
+              <div class="event-date">
               <span class="day">18</span>
               <span class="month">ЯНУ</span>
             </div>
@@ -742,6 +748,7 @@
               <h3>НАЦИОНАЛНА КОНФЕРЕНЦИЯ  ИТА - 15.04.2026 Г.</h3>
               <p>Конференцията се провежда в университета ХТМУ от 15-17 април 2026 г. Учениците ни издават доклади и представят проекти в областта на ИТ и автоматизацията.</p>
               <a href="#" class="btn btn-outline">Прочети повече</a>
+              </div>
             </div>
           </div>
         </div>
@@ -960,6 +967,7 @@
         </div>
       </div>
     </section>
+    </div>
   </main>
 
   <!-- ========== FOOTER ========== -->
@@ -967,7 +975,6 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-block">
-          <h3>Контакти</h3>
           <address>
             <p><strong>Адрес:</strong> ж.к. Стрелбище, ул. „Траянова врата” 26, София</p>
             <p><strong>Телефон:</strong> <a href="tel:+359 888 19 24 59"></a>+359 888 19 24 59</p>
@@ -989,10 +996,7 @@
       </div>
     </div>
   </footer>
-
-  
+  </div>
   <script type="module" src="script.js"></script>
-
-
 </body>
 </html>
