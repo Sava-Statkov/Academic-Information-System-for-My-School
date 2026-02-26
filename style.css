@@ -1,3 +1,203 @@
+/* ========== EVENTS LAYOUT RESTRUCTURE ========== */
+.events-first-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+.events-first-row > .event-card,
+.events-first-row > .events-calendar {
+  min-width: 0;
+}
+.events-calendar {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  height: 100%;
+}
+.events-calendar .calendar {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+}
+.events-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+@media (max-width: 900px) {
+  .events-first-row {
+    grid-template-columns: 1fr;
+  }
+  .events-calendar {
+    margin-top: 2.5rem;
+  }
+  .events-cards-grid {
+    grid-template-columns: 1fr;
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 600px) {
+  .events-first-row {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .events-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}
+/* Calendar sizing to match event card */
+.events-calendar .calendar {
+  min-height: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+/* ========== EVENTS LAYOUT RESTRUCTURE ========== */
+.events-layout {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.events-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .events-layout {
+    grid-template-columns: 1fr;
+  }
+  .events-cards {
+    grid-template-columns: 1fr;
+  }
+  .events-calendar {
+    margin-top: 2.5rem;
+  }
+}
+
+/* ========== CALENDAR COMPONENT ========== */
+.calendar {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid #222831; /* dark gray thin border */
+  padding: 1.2rem 1.2rem 1rem 1.2rem;
+  min-width: 260px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.calendar-month {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.calendar-nav-btn {
+  background: var(--color-gray-100);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.calendar-nav-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+.calendar-day,
+.calendar-date {
+  text-align: center;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.calendar-day {
+  color: var(--color-gray-500);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+}
+.calendar-date {
+  border-radius: var(--radius);
+  background: var(--color-gray-100);
+  color: var(--color-gray-700);
+  opacity: 0.6;
+  cursor: default;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+.calendar-date--event {
+  background: var(--color-primary);
+  color: var(--color-white);
+  opacity: 1;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.calendar-date--event:hover,
+.calendar-date--event:focus {
+  background: var(--color-primary-dark);
+}
+.calendar-date--today {
+  border: 2px solid var(--color-primary);
+}
+.calendar-date--inactive {
+  background: none;
+  color: var(--color-gray-300);
+  opacity: 0.3;
+  cursor: default;
+}
+.calendar-fade {
+  animation: calendarFadeIn 0.4s;
+}
+@keyframes calendarFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.calendar-event-details {
+  margin-top: 1.2rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-200);
+  padding: 1.2rem 1.5rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: calendarFadeIn 0.4s;
+}
+.calendar-event-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+.calendar-event-desc {
+  font-size: 0.95rem;
+  color: var(--color-gray-500);
+}
 /* ============================================
    Втора Английска Гимназия - Стилове
    Модерен, академичен дизайн
