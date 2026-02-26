@@ -682,7 +682,13 @@
       <div class="container">
         <h2 class="section-title" id="eventsHeader">Събития през месеца</h2>
         <p class="section-intro">Актуални събития и мероприятия</p>
-        <div class="events-first-row">
+        <div class="calendar-wrapper">
+          <div class="calendar-container">
+            <div id="calendar-root" class="calendar"></div>
+            <div id="calendar-event-details"></div>
+          </div>
+        </div>
+        <div class="events-cards">
           <div class="event-card">
             <div class="event-date">
               <span class="day">18</span>
@@ -705,12 +711,6 @@
               <a href="#" class="btn btn-outline">Прочети повече</a>
             </div>
           </div>
-          <div class="events-calendar">
-            <div id="calendar-root"></div>
-            <div id="calendar-event-details"></div>
-          </div>
-        </div>
-        <div class="events-cards-grid">
           <div class="event-card">
             <div class="event-date">
               <span class="day">21</span>
