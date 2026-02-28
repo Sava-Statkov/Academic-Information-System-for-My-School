@@ -115,7 +115,7 @@ a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-right: 200px;
+  margin-right: 160px;
   margin-left: -100px;
 }
 
@@ -143,10 +143,10 @@ a {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   flex: 1;
   justify-content: flex-end;
-  padding-right: 0.35rem;
+  padding-right: 0.5rem;
   flex-wrap: nowrap;
 }
 
@@ -155,7 +155,7 @@ a {
 }
 
 .nav-menu li a {
-  padding: 0.45rem 0.9rem;
+  padding: 0.45rem 1rem;
   border-radius: var(--radius-sm);
   font-weight: 500;
   transition: background var(--transition), color var(--transition);
@@ -208,13 +208,13 @@ a {
   background-image: url('images/aeg.png');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.35);
+  filter: brightness(0.5);
 }
 
 .banner-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 60, 93, 0.2), rgba(11, 60, 93, 0.7));
+  background: linear-gradient(180deg, rgba(11, 60, 93, 0.12), rgba(11, 60, 93, 0.55));
 }
 
 .banner-content {
@@ -546,27 +546,33 @@ a {
   box-shadow: var(--shadow-sm);
   display: flex;
   gap: 1rem;
-  align-items: center;
+  align-items: stretch;
 }
 
 .event-date {
-  width: 64px;
-  min-width: 64px;
+  width: 96px;
+  min-width: 96px;
   text-align: center;
   background: var(--color-secondary);
   color: var(--color-white);
   border-radius: 10px;
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
 }
 
 .event-date .day {
-  font-size: 1.4rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .event-date .month {
-  font-size: 0.85rem;
+  font-size: 1rem;
   letter-spacing: 0.1em;
+  font-weight: 600;
 }
 
 .event-body h3 {
@@ -579,6 +585,10 @@ a {
   margin: 0 0 0.6rem;
   color: var(--color-gray-500);
   font-size: 0.9rem;
+}
+
+.event-body {
+  flex: 1;
 }
 
 .btn {
@@ -599,20 +609,75 @@ a {
 }
 
 .achievements-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .achievement-card {
   background: var(--color-white);
   border: 1px solid var(--color-gray-200);
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--transition), box-shadow var(--transition);
-  opacity: 0;
-  transform: translateY(24px);
+  display: flex;
+  gap: 1.5rem;
+  height: 250px;
+  width: min(1000px, 92%);
+  margin: 0 auto;
+  padding: 0.75rem;
+}
+
+.achievement-card--left {
+  flex-direction: row;
+}
+
+.achievement-card--right {
+  flex-direction: row-reverse;
+}
+
+.achievement-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.achievement-image {
+  flex: 0 0 46%;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 220px;
+  background: var(--color-white);
+}
+
+.achievement-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.achievement-content {
+  flex: 1;
+  max-width: 480px;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+  line-height: 1.5;
+}
+
+.achievement-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.achievement-content p {
+  margin: 0;
+  color: var(--color-gray-500);
+  font-size: 1.1rem;
 }
 
 .achievement-card.reveal-visible {
@@ -620,30 +685,21 @@ a {
   transform: translateY(0);
 }
 
-.achievement-image {
-  height: 140px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
-}
+@media (max-width: 900px) {
+  .achievement-card {
+    flex-direction: column;
+    width: 100%;
+  }
 
-.achievement-content {
-  padding: 1.25rem;
-}
+  .achievement-card--right {
+    flex-direction: column;
+    margin-left: 0;
+  }
 
-.achievement-content h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  color: var(--color-primary);
-  font-size: 1.05rem;
-}
-
-.achievement-content p {
-  margin: 0;
-  color: var(--color-gray-500);
-  font-size: 0.95rem;
+  .achievement-image {
+    width: 100%;
+    height: 220px;
+  }
 }
 
 .podcast-player {
