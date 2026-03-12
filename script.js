@@ -1,32 +1,295 @@
-import { fetchScheduleDoc, mapClassToFirestoreId } from './firebase.js';
+import { fetchScheduleDoc, mapClassToFirestoreId, fetchCollectionDocs } from './firebase.js';
 
-const events = {
-  '2026-02-16': {
-    title: 'Национална олимпиада по математика',
-    description: 'Регионален кръг.'
-  },
-  '2026-02-21': {
-    title: 'Олимпиада по английски език',
-    description: 'Областен кръг.'
-  },
-  '2026-01-18': {
-    title: 'Ден на отворените врати',
-    description: 'Посещение на родители и ученици.'
+const BG_MONTHS_FULL = [
+  'Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни',
+  'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'
+];
+
+const BG_MONTHS_SHORT = ['ЯНУ', 'ФЕВ', 'МАР', 'АПР', 'МАЙ', 'ЮНИ', 'ЮЛИ', 'АВГ', 'СЕП', 'ОКТ', 'НОЕ', 'ДЕК'];
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function toDateObject(value) {
+  if (!value) return null;
+
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime()) ? null : value;
   }
-};
 
-function initCalendar() {
+  if (typeof value?.toDate === 'function') {
+    const date = value.toDate();
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  if (typeof value === 'object' && typeof value.seconds === 'number') {
+    const date = new Date(value.seconds * 1000);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+
+    const isoDateOnly = trimmed.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (isoDateOnly) {
+      const year = Number(isoDateOnly[1]);
+      const month = Number(isoDateOnly[2]) - 1;
+      const day = Number(isoDateOnly[3]);
+      const date = new Date(year, month, day);
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    const parsed = new Date(trimmed);
+    return Number.isNaN(parsed.getTime()) ? null : parsed;
+  }
+
+  return null;
+}
+
+function dateToKey(value) {
+  const date = toDateObject(value);
+  if (!date) return '';
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function formatDateBG(value) {
+  const date = toDateObject(value);
+  if (!date) return '';
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+}
+
+function formatDayMonth(value) {
+  const date = toDateObject(value);
+  if (!date) return { day: '--', month: '--' };
+  return {
+    day: String(date.getDate()).padStart(2, '0'),
+    month: BG_MONTHS_SHORT[date.getMonth()] || '--'
+  };
+}
+
+function compareByDate(a, b, field) {
+  const aDate = toDateObject(a?.[field]);
+  const bDate = toDateObject(b?.[field]);
+
+  if (aDate && bDate) return aDate - bDate;
+  if (aDate) return -1;
+  if (bDate) return 1;
+  return 0;
+}
+
+function setBlockMessage(container, message, isError = false) {
+  if (!container) return;
+  container.innerHTML = `<div class="section-message${isError ? ' section-message--error' : ''}">${escapeHtml(message)}</div>`;
+}
+
+function buildCalendarEventsMap(eventsItems) {
+  const map = {};
+  eventsItems.forEach(item => {
+    const key = dateToKey(item.date);
+    if (!key) return;
+    map[key] = {
+      title: String(item.title || 'Без заглавие'),
+      description: String(item.description || ''),
+      dateText: formatDateBG(item.date)
+    };
+  });
+  return map;
+}
+
+function renderEventsCards(eventsItems) {
+  const cardsRoot = document.getElementById('events-cards');
+  if (!cardsRoot) return;
+
+  if (!Array.isArray(eventsItems)) {
+    setBlockMessage(cardsRoot, 'Събитията не могат да бъдат заредени в момента.', true);
+    return;
+  }
+
+  if (!eventsItems.length) {
+    setBlockMessage(cardsRoot, 'Все още няма публикувани събития.');
+    return;
+  }
+
+  const sorted = [...eventsItems].sort((a, b) => compareByDate(a, b, 'date'));
+
+  cardsRoot.innerHTML = sorted.map(item => {
+    const { day, month } = formatDayMonth(item.date);
+    const title = escapeHtml(item.title || 'Без заглавие');
+    const description = escapeHtml(item.description || '');
+    const dateLabel = escapeHtml(formatDateBG(item.date) || 'Без дата');
+
+    return `
+      <article class="event-card">
+        <div class="event-date">
+          <span class="day">${day}</span>
+          <span class="month">${month}</span>
+        </div>
+        <div class="event-body">
+          <h3>${title}</h3>
+          <p class="event-card-date">${dateLabel}</p>
+          <p>${description}</p>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderAchievements(achievementsItems) {
+  const grid = document.getElementById('achievements-grid');
+  if (!grid) return;
+
+  if (!Array.isArray(achievementsItems)) {
+    setBlockMessage(grid, 'Постиженията не могат да бъдат заредени в момента.', true);
+    return;
+  }
+
+  if (!achievementsItems.length) {
+    setBlockMessage(grid, 'Все още няма публикувани постижения.');
+    return;
+  }
+
+  grid.innerHTML = achievementsItems.map((item, index) => {
+    const directionClass = index % 2 === 0 ? 'achievement-card--left' : 'achievement-card--right';
+    const title = escapeHtml(item.title || 'Без заглавие');
+    const description = escapeHtml(item.description || '');
+    const image = escapeHtml(item.image || 'images/logo.png');
+    const altText = `Снимка към постижение: ${title}`;
+
+    return `
+      <article class="achievement-card ${directionClass} reveal">
+        <div class="achievement-image">
+          <img src="${image}" alt="${escapeHtml(altText)}">
+        </div>
+        <div class="achievement-content">
+          <h3>${title}</h3>
+          <p>${description}</p>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+function renderConsultations(consultationsItems) {
+  const tbody = document.getElementById('consultations-body');
+  if (!tbody) return;
+
+  if (!Array.isArray(consultationsItems)) {
+    tbody.innerHTML = '<tr><td colspan="4" class="consultation-empty consultation-empty--error">Консултациите не могат да бъдат заредени в момента.</td></tr>';
+    return;
+  }
+
+  if (!consultationsItems.length) {
+    tbody.innerHTML = '<tr><td colspan="4" class="consultation-empty">Все още няма публикувани консултации.</td></tr>';
+    return;
+  }
+
+  const sorted = [...consultationsItems].sort((a, b) => compareByDate(a, b, 'date'));
+
+  tbody.innerHTML = sorted.map(item => `
+    <tr>
+      <td>${escapeHtml(formatDateBG(item.date) || '-')}</td>
+      <td>${escapeHtml(item.subject || '-')}</td>
+      <td>${escapeHtml(item.teacher || '-')}</td>
+      <td>${escapeHtml(item.room || '-')}</td>
+    </tr>
+  `).join('');
+}
+
+function renderCharity(charityItems) {
+  const timeline = document.getElementById('charity-timeline');
+  if (!timeline) return;
+
+  if (!Array.isArray(charityItems)) {
+    setBlockMessage(timeline, 'Инициативите не могат да бъдат заредени в момента.', true);
+    return;
+  }
+
+  if (!charityItems.length) {
+    setBlockMessage(timeline, 'Все още няма публикувани благотворителни инициативи.');
+    return;
+  }
+
+  const groups = new Map();
+  charityItems.forEach(item => {
+    const year = String(item.year || 'Без година').trim() || 'Без година';
+    if (!groups.has(year)) groups.set(year, []);
+    groups.get(year).push(item);
+  });
+
+  const years = [...groups.keys()].sort((a, b) => {
+    const aNum = Number(a);
+    const bNum = Number(b);
+    const aIsNum = Number.isFinite(aNum);
+    const bIsNum = Number.isFinite(bNum);
+    if (aIsNum && bIsNum) return bNum - aNum;
+    return b.localeCompare(a, 'bg');
+  });
+
+  const html = years.map(year => {
+    const items = groups.get(year) || [];
+    const cards = items.map(item => `
+      <article class="timeline-item reveal">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <time class="timeline-date">${escapeHtml(year)}</time>
+          <h3>${escapeHtml(item.title || 'Без заглавие')}</h3>
+          <p>${escapeHtml(item.description || '')}</p>
+        </div>
+      </article>
+    `).join('');
+
+    return `<h3 class="charity-year-title">${escapeHtml(year)}</h3>${cards}`;
+  }).join('');
+
+  timeline.innerHTML = html;
+}
+
+async function fetchCollectionSafe(name) {
+  try {
+    return await fetchCollectionDocs(name);
+  } catch (error) {
+    console.error(`Failed to fetch ${name}`, error);
+    return null;
+  }
+}
+
+async function loadDynamicSections() {
+  const [eventsItems, achievementsItems, consultationsItems, charityItems] = await Promise.all([
+    fetchCollectionSafe('events'),
+    fetchCollectionSafe('achievements'),
+    fetchCollectionSafe('consultations'),
+    fetchCollectionSafe('charity')
+  ]);
+
+  renderEventsCards(eventsItems);
+  renderAchievements(achievementsItems);
+  renderConsultations(consultationsItems);
+  renderCharity(charityItems);
+
+  return buildCalendarEventsMap(Array.isArray(eventsItems) ? eventsItems : []);
+}
+
+function initCalendar(eventsByDate = {}) {
   const calendarRoot = document.getElementById('calendar-root');
   const eventDetailsRoot = document.getElementById('calendar-event-details');
   if (!calendarRoot) return;
 
-  const MONTHS = [
-    'Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни',
-    'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'
-  ];
   const WEEKDAYS = ['Пон', 'Вт', 'Ср', 'Чет', 'Пет', 'Съб', 'Нед'];
 
-  let today = new Date();
+  const today = new Date();
   let currentMonth = today.getMonth();
   let currentYear = today.getFullYear();
   let selectedDate = null;
@@ -48,22 +311,29 @@ function initCalendar() {
 
     const header = document.createElement('div');
     header.className = 'calendar-header';
+
     const prevBtn = document.createElement('button');
     prevBtn.className = 'calendar-nav-btn';
     prevBtn.innerHTML = '&#8592;';
+    prevBtn.type = 'button';
     prevBtn.addEventListener('click', () => changeMonth(-1));
+
     const nextBtn = document.createElement('button');
     nextBtn.className = 'calendar-nav-btn';
     nextBtn.innerHTML = '&#8594;';
+    nextBtn.type = 'button';
     nextBtn.addEventListener('click', () => changeMonth(1));
+
     const monthLabel = document.createElement('span');
     monthLabel.className = 'calendar-month';
-    monthLabel.textContent = `${MONTHS[month]} ${year}`;
+    monthLabel.textContent = `${BG_MONTHS_FULL[month]} ${year}`;
+
     header.append(prevBtn, monthLabel, nextBtn);
     calendarRoot.appendChild(header);
 
     const grid = document.createElement('div');
     grid.className = 'calendar-grid';
+
     WEEKDAYS.forEach(day => {
       const cell = document.createElement('div');
       cell.className = 'calendar-day';
@@ -73,7 +343,8 @@ function initCalendar() {
 
     const firstDay = new Date(year, month, 1);
     let startDay = firstDay.getDay();
-    startDay = (startDay + 6) % 7; // normalize so Monday = 0
+    startDay = (startDay + 6) % 7;
+
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const totalCells = startDay + daysInMonth;
 
@@ -85,20 +356,23 @@ function initCalendar() {
 
     for (let day = 1; day <= daysInMonth; day += 1) {
       const dateKey = getEventKey(year, month, day);
-      const hasEvent = Boolean(events[dateKey]);
+      const hasEvent = Boolean(eventsByDate[dateKey]);
+
       const dateEl = document.createElement('div');
       dateEl.className = 'calendar-date';
+
       if (hasEvent) dateEl.classList.add('calendar-date--event');
       if (day === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
         dateEl.classList.add('calendar-date--today');
       }
+
       dateEl.textContent = day;
 
       if (hasEvent) {
         dateEl.setAttribute('role', 'button');
         dateEl.tabIndex = 0;
         dateEl.addEventListener('click', () => showEvent(dateKey));
-        dateEl.addEventListener('keydown', (event) => {
+        dateEl.addEventListener('keydown', event => {
           if (event.key === 'Enter' || event.key === ' ') {
             showEvent(dateKey);
           }
@@ -125,20 +399,27 @@ function initCalendar() {
 
   function renderEventDetails() {
     if (!eventDetailsRoot) return;
-    if (!selectedDate || !events[selectedDate]) {
+
+    if (!selectedDate || !eventsByDate[selectedDate]) {
       eventDetailsRoot.innerHTML = '';
       return;
     }
-    const event = events[selectedDate];
+
+    const event = eventsByDate[selectedDate];
+    const safeTitle = escapeHtml(event.title || 'Без заглавие');
+    const safeDescription = escapeHtml(event.description || '');
+    const safeDate = escapeHtml(event.dateText || '');
+
     eventDetailsRoot.innerHTML = `
       <div class="calendar-event-details">
-        <div class="calendar-event-title">${event.title}</div>
-        <div class="calendar-event-desc">${event.description}</div>
+        <div class="calendar-event-title">${safeTitle}</div>
+        <div class="calendar-event-desc">${safeDate}${safeDescription ? ` - ${safeDescription}` : ''}</div>
       </div>`;
   }
 
   function changeMonth(delta) {
     currentMonth += delta;
+
     if (currentMonth > 11) {
       currentMonth = 0;
       currentYear += 1;
@@ -146,6 +427,7 @@ function initCalendar() {
       currentMonth = 11;
       currentYear -= 1;
     }
+
     selectedDate = null;
     renderCalendar(currentYear, currentMonth);
     renderEventDetails();
@@ -156,7 +438,7 @@ function initCalendar() {
 }
 
 function normalizeSchedule(data) {
-  const bgDays = ['Понеделник','Вторник','Сряда','Четвъртък','Петък'];
+  const bgDays = ['Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък'];
   const result = {};
   if (!data || typeof data !== 'object') {
     bgDays.forEach(day => {
@@ -292,7 +574,7 @@ function initMobileMenu() {
 
   toggle.addEventListener('click', toggleMenu);
 
-  document.addEventListener('click', (event) => {
+  document.addEventListener('click', event => {
     if (!menu.classList.contains('is-open')) return;
     if (menu.contains(event.target) || toggle.contains(event.target)) return;
     closeMenu();
@@ -314,7 +596,7 @@ function initScheduleByGrade() {
       const cells = [];
       const time = hourTimes[hour] || '';
       cells.push(`<td><span class="hour-num">${hour}</span><span class="hour-time">${time}</span></td>`);
-      ['Понеделник','Вторник','Сряда','Четвъртък','Петък'].forEach(day => {
+      ['Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък'].forEach(day => {
         const entry = schedule?.[day]?.[hour - 1] || { subject: '', room: '', teacher: '' };
         const subject = (entry.subject || '').trim();
         const room = (entry.room || '').trim();
@@ -461,15 +743,17 @@ function initPodcastButtons() {
   }));
 }
 
-function init() {
-  initCalendar();
+async function init() {
   initStickyHeader();
   initMobileMenu();
   normalizeStaticTableCells();
   initScheduleByGrade();
   initSmoothScroll();
-  initReveal();
   initPodcastButtons();
+
+  const eventsByDate = await loadDynamicSections();
+  initCalendar(eventsByDate);
+  initReveal();
 }
 
 if (document.readyState === 'loading') {

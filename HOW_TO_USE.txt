@@ -8,6 +8,9 @@ Add new school program:
 http://localhost:8000/import.html
 Click add csv and select your csv spreadsheet
 
+Admin panel (all dynamic sections + CSV upload):
+http://localhost:8000/admin.html
+
 Make sure the csv file content is according to the text formatting requirements.
 Reload the website after updating features.
 If it doesn't work refresh the web app with the commands in line 2 and 5.

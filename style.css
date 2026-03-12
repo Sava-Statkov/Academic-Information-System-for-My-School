@@ -115,7 +115,7 @@ a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-right: 160px;
+  margin-right: 100px;
   margin-left: -100px;
 }
 
@@ -155,11 +155,11 @@ a {
 }
 
 .nav-menu li a {
-  padding: 0.45rem 1rem;
+  padding: 1rem 1rem;
   border-radius: var(--radius-sm);
   font-weight: 500;
   transition: background var(--transition), color var(--transition);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .nav-menu li a:hover,
@@ -587,8 +587,28 @@ a {
   font-size: 0.9rem;
 }
 
+.event-card-date {
+  font-weight: 600;
+  color: var(--color-primary) !important;
+}
+
 .event-body {
   flex: 1;
+}
+
+.section-message {
+  background: var(--color-white);
+  border: 1px dashed var(--color-gray-300);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  color: var(--color-gray-600);
+  text-align: center;
+}
+
+.section-message--error {
+  border-color: #f2a7a7;
+  background: #fff3f3;
+  color: #8e2323;
 }
 
 .btn {
@@ -683,6 +703,47 @@ a {
 .achievement-card.reveal-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.consultation-panel {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+}
+
+.consultation-table-wrapper {
+  overflow-x: auto;
+}
+
+.consultation-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+.consultation-table th,
+.consultation-table td {
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  text-align: left;
+}
+
+.consultation-table thead th {
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+.consultation-empty {
+  text-align: center !important;
+  color: var(--color-gray-500);
+  padding: 1rem;
+}
+
+.consultation-empty--error {
+  color: #8e2323;
 }
 
 @media (max-width: 900px) {
@@ -848,6 +909,12 @@ a {
   color: var(--color-secondary);
   font-weight: 600;
   margin-bottom: 0.3rem;
+}
+
+.charity-year-title {
+  margin: 0 0 1rem;
+  color: var(--color-primary);
+  font-size: 1.3rem;
 }
 
 .site-footer {

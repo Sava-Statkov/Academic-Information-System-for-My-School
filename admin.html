@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Админ панел - Втора АЕГ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <main class="admin-page">
+    <section id="admin-login" class="admin-card admin-login">
+      <h1>Админ вход</h1>
+      <p>Въведете парола за достъп до административния панел.</p>
+      <form id="admin-login-form" class="admin-form" autocomplete="off">
+        <label for="admin-password">Парола</label>
+        <input id="admin-password" name="password" type="password" required>
+        <button type="submit">Вход</button>
+      </form>
+      <p id="admin-login-status" class="admin-status" aria-live="polite"></p>
+    </section>
+
+    <section id="admin-dashboard" class="admin-dashboard" hidden>
+      <header class="admin-header admin-card">
+        <h1>Админ панел</h1>
+        <p>Добавяне на съдържание за секциите: Събития, Постижения, Консултации и Благотворителни инициативи.</p>
+      </header>
+
+      <section class="admin-card">
+        <h2>Добави събитие</h2>
+        <form id="events-form" class="admin-form">
+          <label for="event-title">Заглавие</label>
+          <input id="event-title" name="title" type="text" required>
+
+          <label for="event-date">Дата</label>
+          <input id="event-date" name="date" type="date" required>
+
+          <label for="event-description">Описание</label>
+          <textarea id="event-description" name="description" rows="4" required></textarea>
+
+          <button type="submit">Запази събитие</button>
+        </form>
+        <p class="admin-status" data-status-for="events" aria-live="polite"></p>
+      </section>
+
+      <section class="admin-card">
+        <h2>Добави постижение</h2>
+        <form id="achievements-form" class="admin-form">
+          <label for="achievement-title">Заглавие</label>
+          <input id="achievement-title" name="title" type="text" required>
+
+          <label for="achievement-image">URL на изображение</label>
+          <input id="achievement-image" name="image" type="text" required placeholder="images/example.jpg или https://...">
+
+          <label for="achievement-description">Описание</label>
+          <textarea id="achievement-description" name="description" rows="4" required></textarea>
+
+          <button type="submit">Запази постижение</button>
+        </form>
+        <p class="admin-status" data-status-for="achievements" aria-live="polite"></p>
+      </section>
+
+      <section class="admin-card">
+        <h2>Добави консултация</h2>
+        <form id="consultations-form" class="admin-form">
+          <label for="consultation-date">Дата</label>
+          <input id="consultation-date" name="date" type="date" required>
+
+          <label for="consultation-subject">Предмет</label>
+          <input id="consultation-subject" name="subject" type="text" required>
+
+          <label for="consultation-teacher">Учител</label>
+          <input id="consultation-teacher" name="teacher" type="text" required>
+
+          <label for="consultation-room">Кабинет</label>
+          <input id="consultation-room" name="room" type="text" required>
+
+          <button type="submit">Запази консултация</button>
+        </form>
+        <p class="admin-status" data-status-for="consultations" aria-live="polite"></p>
+      </section>
+
+      <section class="admin-card">
+        <h2>Добави благотворителна инициатива</h2>
+        <form id="charity-form" class="admin-form">
+          <label for="charity-year">Година</label>
+          <input id="charity-year" name="year" type="number" min="2000" max="2100" required>
+
+          <label for="charity-title">Заглавие</label>
+          <input id="charity-title" name="title" type="text" required>
+
+          <label for="charity-description">Описание</label>
+          <textarea id="charity-description" name="description" rows="4" required></textarea>
+
+          <button type="submit">Запази инициатива</button>
+        </form>
+        <p class="admin-status" data-status-for="charity" aria-live="polite"></p>
+      </section>
+
+      <section class="admin-card">
+        <h2>Качване на програма от CSV</h2>
+        <p>Това е същият инструмент като в <code>import.html</code>, вграден в админ панела.</p>
+        <div class="admin-form">
+          <label for="csvFile">CSV файл</label>
+          <input type="file" id="csvFile" accept=".csv">
+          <button id="uploadBtn" type="button">Качи в Firestore</button>
+        </div>
+        <p id="schedule-upload-status" class="admin-status" aria-live="polite"></p>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
