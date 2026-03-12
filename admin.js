@@ -6,6 +6,19 @@ import { doc, deleteDoc } from 'https://www.gstatic.com/firebasejs/12.9.0/fireba
 const ADMIN_PASSWORD = 'admin123';
 
 const bgDays = ['Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък'];
+const dayAliases = {
+  'понеделник': 'Понеделник',
+  'вторник': 'Вторник',
+  'сряда': 'Сряда',
+  'четвъртък': 'Четвъртък',
+  'четвъртак': 'Четвъртък',
+  'петък': 'Петък',
+  'monday': 'Понеделник',
+  'tuesday': 'Вторник',
+  'wednesday': 'Сряда',
+  'thursday': 'Четвъртък',
+  'friday': 'Петък'
+};
 const bgMonthsShort = ['ЯНУ', 'ФЕВ', 'МАР', 'АПР', 'МАЙ', 'ЮНИ', 'ЮЛИ', 'АВГ', 'СЕП', 'ОКТ', 'НОЕ', 'ДЕК'];
 
 function setStatus(element, message, state = '') {
@@ -33,6 +46,24 @@ function mapImporterClassToFirestoreId(cls) {
   };
   const mapped = map[letter] || letter.toUpperCase();
   return (num + mapped).toUpperCase();
+}
+
+function detectCsvDelimiter(line) {
+  const commaCount = (line.match(/,/g) || []).length;
+  const semicolonCount = (line.match(/;/g) || []).length;
+  const tabCount = (line.match(/\t/g) || []).length;
+  if (semicolonCount > commaCount && semicolonCount >= tabCount) return ';';
+  if (tabCount > commaCount && tabCount > semicolonCount) return '\t';
+  return ',';
+}
+
+function normalizeHeaderCell(value) {
+  return String(value || '').replace(/^\uFEFF/, '').trim().toLowerCase();
+}
+
+function normalizeDayName(value) {
+  const key = String(value || '').trim().toLowerCase();
+  return dayAliases[key] || '';
 }
 
 function trimValue(value) {
@@ -417,64 +448,102 @@ function setupScheduleCsvUpload() {
 
     try {
       const text = await file.text();
-      const rows = text.split('\n').map(row => row.trim()).filter(row => row.length);
+      const rows = text.split(/\r?\n/).map(row => row.trim()).filter(row => row.length);
 
       if (rows.length < 2) {
         throw new Error('CSV файлът няма достатъчно данни.');
       }
 
-      rows.shift(); // header
+      const delimiter = detectCsvDelimiter(rows[0]);
+      const headerCols = rows.shift().split(delimiter).map(normalizeHeaderCell);
+      const headerMap = {};
+      headerCols.forEach((name, index) => {
+        if (!(name in headerMap)) headerMap[name] = index;
+      });
 
-      const data = {};
+      const requiredColumns = ['class', 'day', 'period', 'subject', 'room', 'teacher'];
+      const missingColumns = requiredColumns.filter(name => !(name in headerMap));
+      if (missingColumns.length) {
+        throw new Error(`Липсващи колони: ${missingColumns.join(', ')}.`);
+      }
+
+      const hasShiftColumn = 'shift' in headerMap;
+
+      const dataByClassShift = {};
+      let invalidRows = 0;
 
       rows.forEach(row => {
-        const columns = row.split(',').map(cell => cell.trim());
-        if (columns.length < 5) return;
+        const columns = row.split(delimiter).map(cell => cell.trim());
 
-        const [cls, dayBg, periodStr, subject, room, teacher] = columns;
+        const cls = columns[headerMap.class] || '';
+        const shiftStr = hasShiftColumn ? (columns[headerMap.shift] || '1') : '1';
+        const dayBg = normalizeDayName(columns[headerMap.day] || '');
+        const periodStr = columns[headerMap.period] || '';
+        const subject = columns[headerMap.subject] || '';
+        const room = columns[headerMap.room] || '';
+        const teacher = columns[headerMap.teacher] || '';
 
-        if (!bgDays.includes(dayBg)) return;
+        if (!cls || !dayBg || !bgDays.includes(dayBg)) {
+          invalidRows += 1;
+          return;
+        }
 
         const period = parseInt(periodStr, 10) - 1;
-        if (Number.isNaN(period) || period < 0 || period > 6) return;
+        if (Number.isNaN(period) || period < 0 || period > 6) {
+          invalidRows += 1;
+          return;
+        }
+
+        const parsedShift = parseInt(shiftStr, 10);
+        const shift = Number.isFinite(parsedShift) && parsedShift > 0 ? parsedShift : 1;
 
         const normalizedClass = mapImporterClassToFirestoreId(cls || '');
-        if (!data[normalizedClass]) {
-          data[normalizedClass] = {};
+        if (!normalizedClass) {
+          invalidRows += 1;
+          return;
+        }
+
+        const key = `${normalizedClass}__${shift}`;
+        if (!dataByClassShift[key]) {
+          dataByClassShift[key] = {
+            classId: normalizedClass,
+            shift,
+            schedule: {}
+          };
           bgDays.forEach(day => {
-            data[normalizedClass][day] = Array.from({ length: 7 }, () => ({ subject: '', room: '', teacher: '' }));
+            dataByClassShift[key].schedule[day] = Array.from({ length: 7 }, () => ({ subject: '', room: '', teacher: '' }));
           });
         }
 
-        data[normalizedClass][dayBg][period] = {
+        dataByClassShift[key].schedule[dayBg][period] = {
           subject: subject || '',
           room: room || '',
           teacher: teacher || ''
         };
       });
 
-      const classIds = Object.keys(data);
-      if (!classIds.length) {
-        throw new Error('Няма валидни редове за качване.');
+      const entries = Object.values(dataByClassShift);
+      if (!entries.length) {
+        throw new Error(`Няма валидни редове за качване. Невалидни: ${invalidRows} от ${rows.length}.`);
       }
 
       let uploaded = 0;
       let failed = 0;
 
-      for (const classId of classIds) {
+      for (const item of entries) {
         try {
-          await writeScheduleDoc(classId, data[classId]);
+          await writeScheduleDoc(item.classId, item.schedule, item.shift);
           uploaded += 1;
         } catch (error) {
           failed += 1;
-          console.error('Failed to upload class:', classId, error);
+          console.error('Failed to upload class:', item.classId, 'shift:', item.shift, error);
         }
       }
 
       if (failed > 0) {
-        setStatus(status, `Качени: ${uploaded}, грешки: ${failed}.`, 'error');
+        setStatus(status, `Качени: ${uploaded}, грешки: ${failed}, невалидни редове: ${invalidRows}.`, 'error');
       } else {
-        setStatus(status, `Качени успешно програми за ${uploaded} класа.`, 'success');
+        setStatus(status, `Качени успешно програми за ${uploaded} класа. Невалидни редове: ${invalidRows}.`, 'success');
       }
     } catch (error) {
       console.error('CSV upload error', error);

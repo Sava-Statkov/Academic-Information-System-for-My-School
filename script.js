@@ -582,13 +582,25 @@ function initMobileMenu() {
 }
 
 function initScheduleByGrade() {
-  const selects = document.querySelectorAll('.schedule-select');
+  const selects = document.querySelectorAll('.schedule-select-row .schedule-select');
   const tables = document.querySelectorAll('.schedule-table-grade');
   if (!selects.length || !tables.length) return;
 
-  const hourTimes = { 1: '7:30–8:10', 2: '8:20–9:00', 3: '9:10–9:50', 4: '10:10–10:50', 5: '11:00–11:40', 6: '11:50–12:30', 7: '12:40–13:20' };
+  const hourTimesByShift = {
+    1: { 1: '7:30–8:10', 2: '8:20–9:00', 3: '9:10–9:50', 4: '10:10–10:50', 5: '11:00–11:40', 6: '11:50–12:30', 7: '12:40–13:20' },
+    2: { 1: '13:30–14:10', 2: '14:20–15:00', 3: '15:10–15:50', 4: '16:10–16:50', 5: '17:00–17:40', 6: '17:50–18:30', 7: '18:40–19:20' }
+  };
 
-  function buildRows(schedule) {
+  function readScheduleShift(data) {
+    const parsed = Number.parseInt(String(data?.shift ?? '1'), 10);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+  }
+
+  function getHourTimes(shift) {
+    return hourTimesByShift[shift] || hourTimesByShift[1];
+  }
+
+  function buildRows(schedule, hourTimes) {
     const rows = [];
     for (let hour = 1; hour <= 7; hour += 1) {
       const cells = [];
@@ -612,6 +624,7 @@ function initScheduleByGrade() {
   }
 
   function ensureSevenRows() {
+    const hourTimes = hourTimesByShift[1];
     tables.forEach(table => {
       const tbody = table.querySelector('tbody');
       if (!tbody) return;
@@ -636,14 +649,17 @@ function initScheduleByGrade() {
       const docId = mapClassToFirestoreId(String(grade));
       const snap = await fetchScheduleDoc(docId);
       if (snap.exists()) {
-        const normalized = normalizeSchedule(snap.data());
+        const rawData = snap.data();
+        const shift = readScheduleShift(rawData);
+        const normalized = normalizeSchedule(rawData);
+        const hourTimes = getHourTimes(shift);
         const tbody = tableBlock.querySelector('tbody');
         if (tbody) {
-          tbody.innerHTML = buildRows(normalized);
+          tbody.innerHTML = buildRows(normalized, hourTimes);
         }
-        setScheduleStatus(`Заредена програма: ${docId}`, false);
+        setScheduleStatus(`Заредена програма: ${docId} (смяна ${shift})`, false);
       } else {
-        setScheduleStatus(`Документът ${docId} не е намерен в Firestore.`, true);
+        setScheduleStatus(`Няма програма за ${docId} в Firestore.`, true);
       }
     } catch (error) {
       console.error('schedule fetch error', error);

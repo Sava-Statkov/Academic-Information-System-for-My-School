@@ -16,6 +16,19 @@ import { writeScheduleDoc } from './firebase.js';
 
 // Keep Bulgarian day names as canonical keys when writing to Firestore
 const bgDays = ['Понеделник','Вторник','Сряда','Четвъртък','Петък'];
+const dayAliases = {
+  'понеделник': 'Понеделник',
+  'вторник': 'Вторник',
+  'сряда': 'Сряда',
+  'четвъртък': 'Четвъртък',
+  'четвъртак': 'Четвъртък',
+  'петък': 'Петък',
+  'monday': 'Понеделник',
+  'tuesday': 'Вторник',
+  'wednesday': 'Сряда',
+  'thursday': 'Четвъртък',
+  'friday': 'Петък'
+};
 
 // Importer-specific mapping: Bulgarian letters -> Latin letters (alphabet index mapping)
 function mapImporterClassToFirestoreId(cls) {
@@ -38,6 +51,24 @@ function mapImporterClassToFirestoreId(cls) {
   return (num + mapped).toUpperCase();
 }
 
+function detectDelimiter(line) {
+  const commaCount = (line.match(/,/g) || []).length;
+  const semicolonCount = (line.match(/;/g) || []).length;
+  const tabCount = (line.match(/\t/g) || []).length;
+  if (semicolonCount > commaCount && semicolonCount >= tabCount) return ';';
+  if (tabCount > commaCount && tabCount > semicolonCount) return '\t';
+  return ',';
+}
+
+function normalizeHeaderCell(value) {
+  return String(value || '').replace(/^\uFEFF/, '').trim().toLowerCase();
+}
+
+function normalizeDay(value) {
+  const key = String(value || '').trim().toLowerCase();
+  return dayAliases[key] || '';
+}
+
 document.getElementById("uploadBtn").addEventListener("click", async () => {
   const fileInput = document.getElementById("csvFile");
   const file = fileInput.files[0];
@@ -48,43 +79,101 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
   }
 
   const text = await file.text();
-  const rows = text.split("\n").map(r => r.trim()).filter(r => r.length);
+  const rows = text.split(/\r?\n/).map(r => r.trim()).filter(r => r.length);
+  if (rows.length < 2) {
+    alert('CSV файлът няма достатъчно данни.');
+    return;
+  }
 
-  const header = rows.shift().split(",");
+  const delimiter = detectDelimiter(rows[0]);
+  const headerCols = rows.shift().split(delimiter).map(normalizeHeaderCell);
+  const headerMap = {};
+  headerCols.forEach((name, idx) => {
+    if (!(name in headerMap)) headerMap[name] = idx;
+  });
+  const required = ['class', 'day', 'period', 'subject', 'room', 'teacher'];
+  const missing = required.filter(name => !(name in headerMap));
+  if (missing.length) {
+    alert(`Липсващи колони: ${missing.join(', ')}.`);
+    return;
+  }
+  const hasShiftColumn = 'shift' in headerMap;
 
-  const data = {};
+  const dataByClassShift = {};
+  let invalidRows = 0;
 
   rows.forEach(row => {
     if (!row.trim()) return;
-    const columns = row.split(",").map(c => c.trim());
-    if (columns.length < 5) return;
+    const columns = row.split(delimiter).map(c => c.trim());
 
-    let [cls, dayBg, periodStr, subject, room, teacher] = columns;
+    const cls = columns[headerMap.class] || '';
+    const shiftStr = hasShiftColumn ? (columns[headerMap.shift] || '1') : '1';
+    const dayBg = normalizeDay(columns[headerMap.day] || '');
+    const periodStr = columns[headerMap.period] || '';
+    const subject = columns[headerMap.subject] || '';
+    const room = columns[headerMap.room] || '';
+    const teacher = columns[headerMap.teacher] || '';
 
-    if (!bgDays.includes(dayBg)) return; // require Bulgarian day name
-
-    const period = parseInt(periodStr, 10) - 1;
-    if (isNaN(period) || period < 0 || period > 6) return;
-
-    const normalizedClass = mapImporterClassToFirestoreId(cls || '');
-    if (!data[normalizedClass]) {
-      data[normalizedClass] = {};
-      bgDays.forEach(d => data[normalizedClass][d] = Array.from({ length: 7 }, () => ({ subject: '', room: '', teacher: '' })));
+    if (!cls || !dayBg || !bgDays.includes(dayBg)) {
+      invalidRows += 1;
+      return;
     }
 
-    data[normalizedClass][dayBg][period] = { subject: subject || '', room: room || '', teacher: teacher || '' };
+    const period = parseInt(periodStr, 10) - 1;
+    if (Number.isNaN(period) || period < 0 || period > 6) {
+      invalidRows += 1;
+      return;
+    }
+
+    const parsedShift = parseInt(shiftStr, 10);
+    const shift = Number.isFinite(parsedShift) && parsedShift > 0 ? parsedShift : 1;
+
+    const normalizedClass = mapImporterClassToFirestoreId(cls || '');
+    if (!normalizedClass) {
+      invalidRows += 1;
+      return;
+    }
+
+    const key = `${normalizedClass}__${shift}`;
+    if (!dataByClassShift[key]) {
+      dataByClassShift[key] = {
+        classId: normalizedClass,
+        shift,
+        schedule: {}
+      };
+      bgDays.forEach(d => {
+        dataByClassShift[key].schedule[d] = Array.from({ length: 7 }, () => ({ subject: '', room: '', teacher: '' }));
+      });
+    }
+
+    dataByClassShift[key].schedule[dayBg][period] = { subject: subject || '', room: room || '', teacher: teacher || '' };
   });
 
-  for (const classId in data) {
+  const entries = Object.values(dataByClassShift);
+  if (!entries.length) {
+    alert(`Няма валидни редове за качване. Невалидни: ${invalidRows} от ${rows.length}.`);
+    return;
+  }
+
+  let uploaded = 0;
+  let failed = 0;
+
+  for (const item of entries) {
     try {
-      await writeScheduleDoc(classId, data[classId]);
-      console.log('Uploaded:', classId);
+      await writeScheduleDoc(item.classId, item.schedule, item.shift);
+      console.log('Uploaded:', item.classId, 'shift:', item.shift);
+      uploaded += 1;
     } catch (err) {
-      console.error('Failed to upload', classId, err);
+      console.error('Failed to upload', item.classId, 'shift:', item.shift, err);
+      failed += 1;
     }
   }
 
-  alert('Upload complete. Check Firestore.');
+  if (failed > 0) {
+    alert(`Качени: ${uploaded}, грешки: ${failed}, невалидни редове: ${invalidRows}.`);
+  } else {
+    alert(`Качени успешно: ${uploaded}. Невалидни редове: ${invalidRows}.`);
+  }
 });
 
 </script>
