@@ -19,6 +19,12 @@
   color: var(--color-primary);
 }
 
+.admin-subtitle {
+  margin: 1.4rem 0 0.4rem;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
 .admin-form {
   display: grid;
   gap: 0.6rem;
@@ -81,6 +87,79 @@
 
 .admin-dashboard[hidden] {
   display: none;
+}
+
+.admin-events-cards {
+  margin-top: 0.2rem;
+}
+
+.admin-manage-list {
+  margin-top: 0.2rem;
+}
+
+.admin-manage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.admin-manage-card,
+.admin-event-card {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+}
+
+.admin-delete-event {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  border: 1px solid #c83c3c;
+  border-radius: 8px;
+  background: #fff5f5;
+  color: #7f1d1d;
+  padding: 0.3rem 0.65rem;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-delete-event:hover,
+.admin-delete-event:focus-visible {
+  background: #fde1e1;
+}
+
+.admin-manage-title {
+  margin: 0 0 0.4rem;
+  color: var(--color-primary);
+  font-size: 1rem;
+  padding-right: 4.8rem;
+}
+
+.admin-manage-meta {
+  margin: 0 0 0.5rem;
+  color: var(--color-gray-500);
+  font-size: 0.9rem;
+}
+
+.admin-manage-text {
+  margin: 0;
+  color: var(--color-gray-600);
+  font-size: 0.95rem;
+}
+
+.admin-achievement-image {
+  margin-top: 0.65rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-gray-200);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--color-gray-100);
 }
 
 @media (max-width: 720px) {

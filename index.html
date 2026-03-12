@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="consultations.css">
 </head>
 
 
@@ -705,13 +706,22 @@
       <div class="container">
         <div class="consultation-panel">
           <h2 class="section-title">Консултации</h2>
-          <p class="section-intro">График на консултациите</p>
-          <div class="consultation-table-wrapper">
-            <table class="consultation-table">
-              <thead><tr><th>Дата</th><th>Предмет</th><th>Учител</th><th>Кабинет</th></tr></thead>
-              <tbody id="consultations-body"></tbody>
-            </table>
+          <p class="section-intro">Потърсете учител, за да видите неговите консултации</p>
+          <div class="consultation-search-wrap">
+            <label for="consultations-search" class="consultation-search-label">Потърси учител</label>
+            <input
+              id="consultations-search"
+              class="consultations-search-input"
+              type="text"
+              autocomplete="off"
+              placeholder="🔎 Потърси учител..."
+              aria-autocomplete="list"
+              aria-controls="consultations-suggestions"
+            >
+            <ul id="consultations-suggestions" class="consultations-suggestions" role="listbox"></ul>
           </div>
+          <p id="consultations-status" class="consultations-status" aria-live="polite"></p>
+          <div id="consultation-card-root" class="consultation-card-root" aria-live="polite"></div>
         </div>
       </div>
      </section>
@@ -861,5 +871,6 @@
   </footer>
   </div>
   <script type="module" src="script.js"></script>
+  <script type="module" src="consultations.js"></script>
 </body>
 </html>

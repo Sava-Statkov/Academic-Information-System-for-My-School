@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Админ панел - Втора АЕГ</title>
+  <title>Админ - Втора АЕГ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
 
     <section id="admin-dashboard" class="admin-dashboard" hidden>
       <header class="admin-header admin-card">
-        <h1>Админ панел</h1>
+        <h1>Админ</h1>
         <p>Добавяне на съдържание за секциите: Събития, Постижения, Консултации и Благотворителни инициативи.</p>
       </header>
 
@@ -44,6 +44,10 @@
           <button type="submit">Запази събитие</button>
         </form>
         <p class="admin-status" data-status-for="events" aria-live="polite"></p>
+
+        <h3 class="admin-subtitle">Съществуващи събития</h3>
+        <p id="admin-events-status" class="admin-status" aria-live="polite"></p>
+        <div id="admin-events-list" class="events-cards admin-events-cards admin-manage-list"></div>
       </section>
 
       <section class="admin-card">
@@ -61,26 +65,10 @@
           <button type="submit">Запази постижение</button>
         </form>
         <p class="admin-status" data-status-for="achievements" aria-live="polite"></p>
-      </section>
 
-      <section class="admin-card">
-        <h2>Добави консултация</h2>
-        <form id="consultations-form" class="admin-form">
-          <label for="consultation-date">Дата</label>
-          <input id="consultation-date" name="date" type="date" required>
-
-          <label for="consultation-subject">Предмет</label>
-          <input id="consultation-subject" name="subject" type="text" required>
-
-          <label for="consultation-teacher">Учител</label>
-          <input id="consultation-teacher" name="teacher" type="text" required>
-
-          <label for="consultation-room">Кабинет</label>
-          <input id="consultation-room" name="room" type="text" required>
-
-          <button type="submit">Запази консултация</button>
-        </form>
-        <p class="admin-status" data-status-for="consultations" aria-live="polite"></p>
+        <h3 class="admin-subtitle">Съществуващи постижения</h3>
+        <p id="admin-achievements-status" class="admin-status" aria-live="polite"></p>
+        <div id="admin-achievements-list" class="admin-manage-grid admin-manage-list"></div>
       </section>
 
       <section class="admin-card">
@@ -98,6 +86,20 @@
           <button type="submit">Запази инициатива</button>
         </form>
         <p class="admin-status" data-status-for="charity" aria-live="polite"></p>
+
+        <h3 class="admin-subtitle">Съществуващи инициативи</h3>
+        <p id="admin-charity-status" class="admin-status" aria-live="polite"></p>
+        <div id="admin-charity-list" class="admin-manage-grid admin-manage-list"></div>
+      </section>
+
+      <section class="admin-card">
+        <h2>Импорт на консултации от CSV</h2>
+        <p>Формат на CSV: <code>teacher,students_day,students_time,parents_day,parents_time,room</code></p>
+        <div class="admin-form">
+          <input type="file" id="consultationsCsv" accept=".csv">
+          <button type="button" id="consultationsUploadBtn">Качи в Firestore</button>
+        </div>
+        <p id="consultationsImportStatus" class="admin-status" aria-live="polite"></p>
       </section>
 
       <section class="admin-card">
@@ -114,5 +116,6 @@
   </main>
 
   <script type="module" src="admin.js"></script>
+  <script type="module" src="consultations-import.js"></script>
 </body>
 </html>

@@ -267,16 +267,14 @@ async function fetchCollectionSafe(name) {
 }
 
 async function loadDynamicSections() {
-  const [eventsItems, achievementsItems, consultationsItems, charityItems] = await Promise.all([
+  const [eventsItems, achievementsItems, charityItems] = await Promise.all([
     fetchCollectionSafe('events'),
     fetchCollectionSafe('achievements'),
-    fetchCollectionSafe('consultations'),
     fetchCollectionSafe('charity')
   ]);
 
   renderEventsCards(eventsItems);
   renderAchievements(achievementsItems);
-  renderConsultations(consultationsItems);
   renderCharity(charityItems);
 
   return buildCalendarEventsMap(Array.isArray(eventsItems) ? eventsItems : []);
