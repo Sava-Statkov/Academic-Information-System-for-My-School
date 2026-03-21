@@ -155,7 +155,7 @@ a {
 }
 
 .nav-menu li a {
-  padding: 1rem 1rem;
+  padding: 1.5rem 1rem;
   border-radius: var(--radius-sm);
   font-weight: 500;
   transition: background var(--transition), color var(--transition);
@@ -208,7 +208,7 @@ a {
   background-image: url('images/aeg.png');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.5);
+  filter: brightness(0.4);
 }
 
 .banner-overlay {
@@ -234,7 +234,7 @@ a {
 }
 
 .section {
-  padding: 1.5rem 0;
+  padding: 1rem 0;
 }
 
 .section:nth-of-type(even) {
@@ -920,7 +920,7 @@ a {
 .site-footer {
   background: var(--color-primary);
   color: var(--color-white);
-  padding: 3rem 0 2rem;
+  padding: 1rem 0;
 }
 
 .footer-grid {
@@ -947,6 +947,10 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 0.35rem;
+}
+
+.footer-block address {
+  font-style: normal;
 }
 
 .social-links {

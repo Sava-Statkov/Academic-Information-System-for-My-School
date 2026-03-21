@@ -26,7 +26,8 @@
     <section id="admin-dashboard" class="admin-dashboard" hidden>
       <header class="admin-header admin-card">
         <h1>Админ Страница</h1>
-        <p>Добавяне на съдържание за секциите: <br><br> - Събития <br> - Постижения <br> - Консултации <br> - Благотворителни инициативи <br> - Програми</p>
+        <p>Добавяне на съдържание за секциите: <br><br> - Събития <br> - Постижения <br> 
+          - Благотворителни инициативи <br> - Консултации <br> - Програми</p>
       </header>
 
       <section class="admin-card">
@@ -94,21 +95,20 @@
 
       <section class="admin-card">
         <h2>Импорт на консултации от CSV</h2>
-        <p>Формат на CSV: <code>teacher,students_day,students_time,parents_day,parents_time,room</code></p>
+        <p>Формат на CSV: <code> teacher, students_day, students_time, parents_day, parents_time, room</code></p>
         <div class="admin-form">
           <input type="file" id="consultationsCsv" accept=".csv">
-          <button type="button" id="consultationsUploadBtn">Качи в Firestore</button>
+          <button type="button" id="consultationsUploadBtn">Качи Консултации</button>
         </div>
         <p id="consultationsImportStatus" class="admin-status" aria-live="polite"></p>
       </section>
 
       <section class="admin-card">
         <h2>Качване на програма от CSV</h2>
-        <p>Това е същият инструмент като в <code>import.html</code>, вграден в админ панела.</p>
+        <p>Формат на CSV: <code>class, shift, day, period, subject, room, teacher</code></p>
         <div class="admin-form">
-          <label for="csvFile">CSV файл</label>
           <input type="file" id="csvFile" accept=".csv">
-          <button id="uploadBtn" type="button">Качи в Firestore</button>
+          <button id="uploadBtn" type="button">Качи Програма</button>
         </div>
         <p id="schedule-upload-status" class="admin-status" aria-live="polite"></p>
       </section>

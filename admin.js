@@ -165,7 +165,7 @@ function getAdminSectionRefs(collectionName) {
 }
 
 function buildDeleteButton() {
-  return '<button type="button" class="admin-delete-event">Delete</button>';
+  return '<button type="button" class="admin-delete-event">Изтрий</button>';
 }
 
 function renderAdminEvents(items) {
