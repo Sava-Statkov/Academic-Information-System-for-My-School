@@ -1,0 +1,23 @@
+
+.section {
+  padding: 1.7rem 0;
+}
+
+.section:nth-of-type(even) {
+  background: var(--color-gray-100);
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  text-align: center;
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+  color: var(--color-gray-500);
+}

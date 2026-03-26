@@ -1,0 +1,160 @@
+
+.site-header {
+  background: transparent;
+}
+
+.header-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 15;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+  transition: background var(--transition), box-shadow var(--transition);
+  height: var(--header-height);
+}
+
+.header-top.scrolled {
+  background: var(--color-white);
+  box-shadow: var(--shadow-md);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  height: 100%;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  flex: none;
+  margin-right: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: 50px;
+  margin-left: -100px;
+}
+
+.logo-img {
+  width: 48px;
+  height: auto;
+  display: block;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+.nav-menu li {
+  white-space: nowrap;
+}
+
+.nav-menu li a {
+  padding: 1.5rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+  font-size: 0.85rem;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a:focus-visible {
+  background: var(--color-gray-100);
+  color: var(--color-primary);
+}
+
+.nav-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 12px;
+  background: var(--color-white);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.nav-toggle span {
+  width: 18px;
+  height: 2px;
+  background: var(--color-primary);
+  display: block;
+  border-radius: 999px;
+}
+
+.banner {
+  position: relative;
+  min-height: clamp(320px, 45vw, 420px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  overflow: hidden;
+  margin-top: var(--header-height);
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/aeg.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4);
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 60, 93, 0.12), rgba(11, 60, 93, 0.55));
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  color: var(--color-white);
+  text-align: center;
+  width: 100%;
+}
+
+.banner-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.8rem);
+  margin: 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

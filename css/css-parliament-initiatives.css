@@ -1,0 +1,64 @@
+.parliament-activities-panel {
+  margin-top: 1.35rem;
+  padding: 1.15rem 1rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(11, 60, 93, 0.15);
+}
+
+.parliament-activities-title {
+  margin: 0 0 1rem;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  text-align: center;
+}
+
+.parliament-initiatives-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.parliament-initiative-card {
+  position: relative;
+  margin: 0;
+  padding: 1.1rem 1.1rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(11, 60, 93, 0.17);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(243, 247, 252, 0.94));
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+.parliament-initiative-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+}
+
+.parliament-initiative-month {
+  margin: 0 0 0.55rem;
+  color: var(--color-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.parliament-initiative-description {
+  margin: 0;
+  color: var(--color-gray-900);
+  font-weight: 600;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.parliament-initiative-extra {
+  margin: 0.5rem 0 0;
+  color: var(--color-gray-500);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  white-space: pre-line;
+}

@@ -1,181 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="bg">
 <head>
   <meta charset="UTF-8">
-  <title>Upload Schedule CSV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Импорт на програма</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f6f8;
+      color: #2f3744;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+
+    .card {
+      max-width: 720px;
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid #e4e7ec;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #0b3c5d;
+      font-size: 1.5rem;
+    }
+
+    a {
+      color: #0b3c5d;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-
-<h1>Upload Schedule CSV</h1>
-<input type="file" id="csvFile" accept=".csv" />
-<button id="uploadBtn">Upload to Firestore</button>
-
-<script type="module">
-
-import { writeScheduleDoc } from './firebase.js';
-
-// Keep Bulgarian day names as canonical keys when writing to Firestore
-const bgDays = ['Понеделник','Вторник','Сряда','Четвъртък','Петък'];
-const dayAliases = {
-  'понеделник': 'Понеделник',
-  'вторник': 'Вторник',
-  'сряда': 'Сряда',
-  'четвъртък': 'Четвъртък',
-  'четвъртак': 'Четвъртък',
-  'петък': 'Петък',
-  'monday': 'Понеделник',
-  'tuesday': 'Вторник',
-  'wednesday': 'Сряда',
-  'thursday': 'Четвъртък',
-  'friday': 'Петък'
-};
-
-// Importer-specific mapping: Bulgarian letters -> Latin letters (alphabet index mapping)
-function mapImporterClassToFirestoreId(cls) {
-  if (!cls) return '';
-  const s = String(cls).trim().toLowerCase();
-  const m = s.match(/^(\d+)\s*([а-яё]+)$/i);
-  if (!m) return String(cls).trim().toUpperCase();
-  const num = m[1];
-  const letter = m[2][0];
-  const map = {
-    'а': 'A',
-    'б': 'B',
-    'в': 'C',
-    'г': 'D',
-    'д': 'E',
-    'е': 'F',
-    'ж': 'G'
-  };
-  const mapped = map[letter] || letter.toUpperCase();
-  return (num + mapped).toUpperCase();
-}
-
-function detectDelimiter(line) {
-  const commaCount = (line.match(/,/g) || []).length;
-  const semicolonCount = (line.match(/;/g) || []).length;
-  const tabCount = (line.match(/\t/g) || []).length;
-  if (semicolonCount > commaCount && semicolonCount >= tabCount) return ';';
-  if (tabCount > commaCount && tabCount > semicolonCount) return '\t';
-  return ',';
-}
-
-function normalizeHeaderCell(value) {
-  return String(value || '').replace(/^\uFEFF/, '').trim().toLowerCase();
-}
-
-function normalizeDay(value) {
-  const key = String(value || '').trim().toLowerCase();
-  return dayAliases[key] || '';
-}
-
-document.getElementById("uploadBtn").addEventListener("click", async () => {
-  const fileInput = document.getElementById("csvFile");
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert("Please select CSV file");
-    return;
-  }
-
-  const text = await file.text();
-  const rows = text.split(/\r?\n/).map(r => r.trim()).filter(r => r.length);
-  if (rows.length < 2) {
-    alert('CSV файлът няма достатъчно данни.');
-    return;
-  }
-
-  const delimiter = detectDelimiter(rows[0]);
-  const headerCols = rows.shift().split(delimiter).map(normalizeHeaderCell);
-  const headerMap = {};
-  headerCols.forEach((name, idx) => {
-    if (!(name in headerMap)) headerMap[name] = idx;
-  });
-  const required = ['class', 'day', 'period', 'subject', 'room', 'teacher'];
-  const missing = required.filter(name => !(name in headerMap));
-  if (missing.length) {
-    alert(`Липсващи колони: ${missing.join(', ')}.`);
-    return;
-  }
-  const hasShiftColumn = 'shift' in headerMap;
-
-  const dataByClassShift = {};
-  let invalidRows = 0;
-
-  rows.forEach(row => {
-    if (!row.trim()) return;
-    const columns = row.split(delimiter).map(c => c.trim());
-
-    const cls = columns[headerMap.class] || '';
-    const shiftStr = hasShiftColumn ? (columns[headerMap.shift] || '1') : '1';
-    const dayBg = normalizeDay(columns[headerMap.day] || '');
-    const periodStr = columns[headerMap.period] || '';
-    const subject = columns[headerMap.subject] || '';
-    const room = columns[headerMap.room] || '';
-    const teacher = columns[headerMap.teacher] || '';
-
-    if (!cls || !dayBg || !bgDays.includes(dayBg)) {
-      invalidRows += 1;
-      return;
-    }
-
-    const period = parseInt(periodStr, 10) - 1;
-    if (Number.isNaN(period) || period < 0 || period > 6) {
-      invalidRows += 1;
-      return;
-    }
-
-    const parsedShift = parseInt(shiftStr, 10);
-    const shift = Number.isFinite(parsedShift) && parsedShift > 0 ? parsedShift : 1;
-
-    const normalizedClass = mapImporterClassToFirestoreId(cls || '');
-    if (!normalizedClass) {
-      invalidRows += 1;
-      return;
-    }
-
-    const key = `${normalizedClass}__${shift}`;
-    if (!dataByClassShift[key]) {
-      dataByClassShift[key] = {
-        classId: normalizedClass,
-        shift,
-        schedule: {}
-      };
-      bgDays.forEach(d => {
-        dataByClassShift[key].schedule[d] = Array.from({ length: 7 }, () => ({ subject: '', room: '', teacher: '' }));
-      });
-    }
-
-    dataByClassShift[key].schedule[dayBg][period] = { subject: subject || '', room: room || '', teacher: teacher || '' };
-  });
-
-  const entries = Object.values(dataByClassShift);
-  if (!entries.length) {
-    alert(`Няма валидни редове за качване. Невалидни: ${invalidRows} от ${rows.length}.`);
-    return;
-  }
-
-  let uploaded = 0;
-  let failed = 0;
-
-  for (const item of entries) {
-    try {
-      await writeScheduleDoc(item.classId, item.schedule, item.shift);
-      console.log('Uploaded:', item.classId, 'shift:', item.shift);
-      uploaded += 1;
-    } catch (err) {
-      console.error('Failed to upload', item.classId, 'shift:', item.shift, err);
-      failed += 1;
-    }
-  }
-
-  if (failed > 0) {
-    alert(`Качени: ${uploaded}, грешки: ${failed}, невалидни редове: ${invalidRows}.`);
-  } else {
-    alert(`Качени успешно: ${uploaded}. Невалидни редове: ${invalidRows}.`);
-  }
-});
-
-</script>
+  <main class="card">
+    <h1>Импортът е преместен</h1>
+    <p>Тази страница е legacy. Импортът на програма и консултации вече е в админ панела.</p>
+    <p>Използвайте <a href="admin.html">admin.html</a> и секциите „Качване на програма от CSV“ и „Импорт на консултации от CSV“.</p>
+  </main>
 </body>
 </html>

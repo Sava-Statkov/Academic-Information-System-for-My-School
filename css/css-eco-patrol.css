@@ -1,0 +1,44 @@
+.section-eco-patrol .section-title {
+  margin-bottom: 1rem;
+}
+
+.eco-patrol-description {
+  max-width: 880px;
+  margin: 0 auto 1.75rem;
+  padding: 0.85rem 1rem;
+  text-align: justify;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius);
+}
+
+.eco-patrol-description p {
+  margin: 0;
+  line-height: 1.8;
+  color: var(--color-gray-600);
+}
+
+.eco-patrol-activities-title {
+  max-width: 750px;
+  margin: 0 auto 1rem;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-weight: 600;
+}
+
+.eco-patrol-content {
+  max-width: 750px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.eco-patrol-note {
+  margin: 0;
+  padding: 0.95rem 1.15rem;
+  background: var(--color-white);
+  border-left: 4px solid var(--color-primary-dark);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  box-shadow: var(--shadow-sm);
+  color: var(--color-gray-700);
+  text-align: justify;
+}

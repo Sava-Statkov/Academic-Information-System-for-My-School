@@ -1,0 +1,7 @@
+.reveal {
+  opacity: 0;
+}
+
+.reveal-visible {
+  opacity: 1 !important;
+}

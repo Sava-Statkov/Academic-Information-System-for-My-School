@@ -7,8 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
   <main class="admin-page">
@@ -27,7 +27,7 @@
       <header class="admin-header admin-card">
         <h1>Админ Страница</h1>
         <p>Добавяне на съдържание за секциите: <br><br> - Събития <br> - Постижения <br> 
-          - Благотворителни инициативи <br> - Консултации <br> - Програми</p>
+          - Благотворителни инициативи <br> - Парламент инициативи <br> - Консултации <br> - Програми</p>
       </header>
 
       <section class="admin-card">
@@ -91,6 +91,41 @@
         <h3 class="admin-subtitle">Съществуващи инициативи</h3>
         <p id="admin-charity-status" class="admin-status" aria-live="polite"></p>
         <div id="admin-charity-list" class="admin-manage-grid admin-manage-list"></div>
+      </section>
+
+      <section class="admin-card">
+        <h2>Добави инициатива на Училищния парламент</h2>
+        <form id="parliament-initiatives-form" class="admin-form">
+          <label for="parliament-initiative-month">Месец</label>
+          <select id="parliament-initiative-month" name="month" required>
+            <option value="">Избери месец</option>
+            <option value="Януари">Януари</option>
+            <option value="Февруари">Февруари</option>
+            <option value="Март">Март</option>
+            <option value="Април">Април</option>
+            <option value="Май">Май</option>
+            <option value="Юни">Юни</option>
+            <option value="Юли">Юли</option>
+            <option value="Август">Август</option>
+            <option value="Септември">Септември</option>
+            <option value="Октомври">Октомври</option>
+            <option value="Ноември">Ноември</option>
+            <option value="Декември">Декември</option>
+          </select>
+
+          <label for="parliament-initiative-description">Дейност</label>
+          <textarea id="parliament-initiative-description" name="description" rows="4" required></textarea>
+
+          <label for="parliament-initiative-extra">Допълнителна информация</label>
+          <textarea id="parliament-initiative-extra" name="extra_info" rows="3" required></textarea>
+
+          <button type="submit">Запази инициатива</button>
+        </form>
+        <p class="admin-status" data-status-for="parliament_initiatives" aria-live="polite"></p>
+
+        <h3 class="admin-subtitle">Съществуващи инициативи на парламента</h3>
+        <p id="admin-parliament-initiatives-status" class="admin-status" aria-live="polite"></p>
+        <div id="admin-parliament-initiatives-list" class="admin-manage-grid admin-manage-list"></div>
       </section>
 
       <section class="admin-card">

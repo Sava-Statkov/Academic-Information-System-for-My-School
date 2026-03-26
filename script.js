@@ -6,6 +6,32 @@ const BG_MONTHS_FULL = [
 ];
 
 const BG_MONTHS_SHORT = ['ЯНУ', 'ФЕВ', 'МАР', 'АПР', 'МАЙ', 'ЮНИ', 'ЮЛИ', 'АВГ', 'СЕП', 'ОКТ', 'НОЕ', 'ДЕК'];
+const BG_MONTH_ALIASES = {
+  'януари': 1,
+  'февруари': 2,
+  'март': 3,
+  'април': 4,
+  'май': 5,
+  'юни': 6,
+  'юли': 7,
+  'август': 8,
+  'септември': 9,
+  'октомври': 10,
+  'ноември': 11,
+  'декември': 12,
+  'january': 1,
+  'february': 2,
+  'march': 3,
+  'april': 4,
+  'may': 5,
+  'june': 6,
+  'july': 7,
+  'august': 8,
+  'september': 9,
+  'october': 10,
+  'november': 11,
+  'december': 12
+};
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -88,6 +114,30 @@ function compareByDate(a, b, field) {
   if (aDate) return -1;
   if (bDate) return 1;
   return 0;
+}
+
+function parseMonthIndex(value) {
+  if (value === null || value === undefined) return null;
+
+  const asNumber = Number.parseInt(String(value).trim(), 10);
+  if (Number.isFinite(asNumber) && asNumber >= 1 && asNumber <= 12) {
+    return asNumber;
+  }
+
+  const key = String(value).trim().toLowerCase();
+  if (!key) return null;
+
+  if (key in BG_MONTH_ALIASES) {
+    return BG_MONTH_ALIASES[key];
+  }
+
+  return null;
+}
+
+function normalizeMonthLabel(value) {
+  const index = parseMonthIndex(value);
+  if (!index) return String(value || 'Без месец').trim() || 'Без месец';
+  return BG_MONTHS_FULL[index - 1] || 'Без месец';
 }
 
 function setBlockMessage(container, message, isError = false) {
@@ -257,6 +307,48 @@ function renderCharity(charityItems) {
   timeline.innerHTML = html;
 }
 
+function renderParliamentInitiatives(initiativesItems) {
+  const list = document.getElementById('parliament-initiatives-list');
+  if (!list) return;
+
+  if (!Array.isArray(initiativesItems)) {
+    setBlockMessage(list, 'Инициативите на парламента не могат да бъдат заредени в момента.', true);
+    return;
+  }
+
+  if (!initiativesItems.length) {
+    setBlockMessage(list, 'Все още няма публикувани инициативи на парламента.');
+    return;
+  }
+
+  const sorted = [...initiativesItems].sort((a, b) => {
+    const aIndex = parseMonthIndex(a?.month);
+    const bIndex = parseMonthIndex(b?.month);
+
+    if (aIndex && bIndex) return aIndex - bIndex;
+    if (aIndex) return -1;
+    if (bIndex) return 1;
+
+    const aMonth = String(a?.month || '');
+    const bMonth = String(b?.month || '');
+    return aMonth.localeCompare(bMonth, 'bg');
+  });
+
+  list.innerHTML = sorted.map(item => {
+    const monthText = escapeHtml(normalizeMonthLabel(item.month));
+    const description = escapeHtml(item.description || '');
+    const extraInfo = escapeHtml(item.extra_info || item.extra || '');
+
+    return `
+      <article class="parliament-initiative-card reveal">
+        <p class="parliament-initiative-month">${monthText}</p>
+        <p class="parliament-initiative-description">${description || 'Без описание'}</p>
+        <p class="parliament-initiative-extra">${extraInfo || 'Няма допълнителна информация.'}</p>
+      </article>
+    `;
+  }).join('');
+}
+
 async function fetchCollectionSafe(name) {
   try {
     return await fetchCollectionDocs(name);
@@ -267,15 +359,17 @@ async function fetchCollectionSafe(name) {
 }
 
 async function loadDynamicSections() {
-  const [eventsItems, achievementsItems, charityItems] = await Promise.all([
+  const [eventsItems, achievementsItems, charityItems, parliamentInitiativesItems] = await Promise.all([
     fetchCollectionSafe('events'),
     fetchCollectionSafe('achievements'),
-    fetchCollectionSafe('charity')
+    fetchCollectionSafe('charity'),
+    fetchCollectionSafe('parliament_initiatives')
   ]);
 
   renderEventsCards(eventsItems);
   renderAchievements(achievementsItems);
   renderCharity(charityItems);
+  renderParliamentInitiatives(parliamentInitiativesItems);
 
   return buildCalendarEventsMap(Array.isArray(eventsItems) ? eventsItems : []);
 }

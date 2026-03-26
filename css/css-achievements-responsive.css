@@ -1,0 +1,16 @@
+@media (max-width: 900px) {
+  .achievement-card {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .achievement-card--right {
+    flex-direction: column;
+    margin-left: 0;
+  }
+
+  .achievement-image {
+    width: 100%;
+    height: 220px;
+  }
+}

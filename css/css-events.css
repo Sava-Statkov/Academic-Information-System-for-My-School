@@ -1,0 +1,91 @@
+.events-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+}
+
+.events-cards--stacked {
+  grid-template-columns: repeat(2, minmax(240px, 1fr));
+  gap: 1rem;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .events-cards--stacked {
+    grid-template-columns: 1fr;
+  }
+}
+
+.event-card {
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.event-date {
+  width: 96px;
+  min-width: 96px;
+  text-align: center;
+  background: var(--color-secondary);
+  color: var(--color-white);
+  border-radius: 10px;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+}
+
+.event-date .day {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.event-date .month {
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.event-body h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  color: var(--color-gray-900);
+}
+
+.event-body p {
+  margin: 0 0 0.6rem;
+  color: var(--color-gray-500);
+  font-size: 0.9rem;
+}
+
+.event-card-date {
+  font-weight: 600;
+  color: var(--color-primary) !important;
+}
+
+.event-body {
+  flex: 1;
+}
+
+.section-message {
+  background: var(--color-white);
+  border: 1px dashed var(--color-gray-300);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  color: var(--color-gray-600);
+  text-align: center;
+}
+
+.section-message--error {
+  border-color: #f2a7a7;
+  background: #fff3f3;
+  color: #8e2323;
+}

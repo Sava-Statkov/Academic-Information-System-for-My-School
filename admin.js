@@ -20,12 +20,54 @@ const dayAliases = {
   'friday': 'Петък'
 };
 const bgMonthsShort = ['ЯНУ', 'ФЕВ', 'МАР', 'АПР', 'МАЙ', 'ЮНИ', 'ЮЛИ', 'АВГ', 'СЕП', 'ОКТ', 'НОЕ', 'ДЕК'];
+const bgMonthsFull = ['Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни', 'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'];
+const monthToOrderMap = {
+  'януари': 1,
+  'февруари': 2,
+  'март': 3,
+  'април': 4,
+  'май': 5,
+  'юни': 6,
+  'юли': 7,
+  'август': 8,
+  'септември': 9,
+  'октомври': 10,
+  'ноември': 11,
+  'декември': 12,
+  'january': 1,
+  'february': 2,
+  'march': 3,
+  'april': 4,
+  'may': 5,
+  'june': 6,
+  'july': 7,
+  'august': 8,
+  'september': 9,
+  'october': 10,
+  'november': 11,
+  'december': 12
+};
 
 function setStatus(element, message, state = '') {
   if (!element) return;
   element.textContent = message;
   element.classList.remove('error', 'success');
   if (state) element.classList.add(state);
+}
+
+function getFirebaseErrorMessage(error) {
+  const code = trimValue(error?.code).toLowerCase();
+  if (code === 'permission-denied') {
+    return 'Нямате права за запис. Проверете Firestore Rules за колекцията parliament_initiatives.';
+  }
+  if (code === 'failed-precondition') {
+    return 'Firestore не е инициализиран напълно. Създайте Firestore Database в Firebase Console.';
+  }
+  if (code === 'unavailable') {
+    return 'Няма връзка с Firestore в момента. Опитайте отново след малко.';
+  }
+
+  return trimValue(error?.message) || 'неизвестна';
 }
 
 function mapImporterClassToFirestoreId(cls) {
@@ -123,6 +165,25 @@ function sortByDateField(items, fieldName) {
   });
 }
 
+function parseMonthOrder(value) {
+  if (value === null || value === undefined) return null;
+
+  const asNum = Number.parseInt(String(value).trim(), 10);
+  if (Number.isFinite(asNum) && asNum >= 1 && asNum <= 12) {
+    return asNum;
+  }
+
+  const key = String(value).trim().toLowerCase();
+  if (!key) return null;
+  return monthToOrderMap[key] || null;
+}
+
+function normalizeMonthLabel(value) {
+  const monthOrder = parseMonthOrder(value);
+  if (!monthOrder) return trimValue(value) || 'Без месец';
+  return bgMonthsFull[monthOrder - 1] || 'Без месец';
+}
+
 function getAdminSectionRefs(collectionName) {
   const map = {
     events: {
@@ -151,6 +212,15 @@ function getAdminSectionRefs(collectionName) {
       loadErrorText: 'Грешка при зареждане на инициативите.',
       deleteConfirmText: 'Сигурни ли сте, че искате да изтриете тази инициатива?',
       deleteSuccessText: 'Инициативата е изтрита.'
+    },
+    parliament_initiatives: {
+      listId: 'admin-parliament-initiatives-list',
+      statusId: 'admin-parliament-initiatives-status',
+      emptyText: 'Няма инициативи на парламента за показване.',
+      loadingText: 'Зареждане на инициативите на парламента...',
+      loadErrorText: 'Грешка при зареждане на инициативите на парламента.',
+      deleteConfirmText: 'Сигурни ли сте, че искате да изтриете тази инициатива на парламента?',
+      deleteSuccessText: 'Инициативата на парламента е изтрита.'
     }
   };
 
@@ -290,6 +360,59 @@ function renderAdminCharity(items) {
   setStatus(refs.statusEl, '');
 }
 
+function renderAdminParliamentInitiatives(items) {
+  const refs = getAdminSectionRefs('parliament_initiatives');
+  if (!refs) return;
+
+  if (!Array.isArray(items)) {
+    refs.listEl.innerHTML = '<div class="section-message section-message--error">Инициативите на парламента не могат да бъдат заредени.</div>';
+    setStatus(refs.statusEl, refs.loadErrorText, 'error');
+    return;
+  }
+
+  if (!items.length) {
+    refs.listEl.innerHTML = `<div class="section-message">${refs.emptyText}</div>`;
+    setStatus(refs.statusEl, '');
+    return;
+  }
+
+  const sorted = [...items].sort((a, b) => {
+    const aOrder = parseMonthOrder(a?.month);
+    const bOrder = parseMonthOrder(b?.month);
+
+    if (aOrder && bOrder) return aOrder - bOrder;
+    if (aOrder) return -1;
+    if (bOrder) return 1;
+
+    return String(a?.month || '').localeCompare(String(b?.month || ''), 'bg');
+  });
+
+  refs.listEl.innerHTML = sorted.map(item => {
+    const docId = escapeHtml(item.id || '');
+    const month = normalizeMonthLabel(item.month);
+    const description = trimValue(item.description);
+    const extraInfo = trimValue(item.extra_info || item.extra || '');
+    const monthHtml = escapeHtml(month);
+    const descriptionHtml = escapeHtml(description);
+    const extraInfoHtml = escapeHtml(extraInfo);
+
+    return `
+      <article
+        class="admin-manage-card"
+        data-id="${docId}"
+        data-collection="parliament_initiatives"
+      >
+        ${buildDeleteButton()}
+        <h4 class="admin-manage-title admin-parliament-description">Дейност: ${descriptionHtml || 'Без описание'}</h4>
+        <p class="admin-manage-meta admin-parliament-month">${monthHtml}</p>
+        <p class="admin-manage-text admin-manage-text--subtle admin-parliament-extra">${extraInfoHtml || 'Няма допълнителна информация.'}</p>
+      </article>
+    `;
+  }).join('');
+
+  setStatus(refs.statusEl, '');
+}
+
 async function loadAdminCollection(collectionName, renderer) {
   const refs = getAdminSectionRefs(collectionName);
   if (!refs) return;
@@ -316,11 +439,16 @@ async function loadAdminCharity() {
   await loadAdminCollection('charity', renderAdminCharity);
 }
 
+async function loadAdminParliamentInitiatives() {
+  await loadAdminCollection('parliament_initiatives', renderAdminParliamentInitiatives);
+}
+
 async function loadAllAdminCards() {
   await Promise.all([
     loadAdminEvents(),
     loadAdminAchievements(),
-    loadAdminCharity()
+    loadAdminCharity(),
+    loadAdminParliamentInitiatives()
   ]);
 }
 
@@ -363,6 +491,52 @@ function setupAdminDeleteHandlers() {
   });
 }
 
+function setupParliamentInitiativesForm() {
+  const form = document.getElementById('parliament-initiatives-form');
+  const status = document.querySelector('[data-status-for="parliament_initiatives"]');
+  if (!form) return;
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const formData = new FormData(form);
+    const monthRaw = trimValue(formData.get('month'));
+    const monthOrder = parseMonthOrder(monthRaw);
+    const month = monthOrder ? bgMonthsFull[monthOrder - 1] : '';
+    const description = trimValue(formData.get('description'));
+    const extraInfo = trimValue(formData.get('extra_info'));
+
+    if (!month || !description || !extraInfo) {
+      setStatus(status, 'Попълнете месец, дейност и допълнителна информация.', 'error');
+      return;
+    }
+
+    const button = form.querySelector('button[type="submit"]');
+    if (button) button.disabled = true;
+    setStatus(status, 'Записване...');
+
+    try {
+      await addCollectionDoc('parliament_initiatives', {
+        month,
+        description,
+        extra_info: extraInfo
+      });
+
+      form.reset();
+      setStatus(status, 'Записано успешно.', 'success');
+      await loadAdminParliamentInitiatives();
+      const refs = getAdminSectionRefs('parliament_initiatives');
+      setStatus(refs?.statusEl, 'Инициативата е добавена успешно.', 'success');
+    } catch (error) {
+      console.error('Failed to save in parliament_initiatives', error);
+      setStatus(status, `Грешка при запис: ${getFirebaseErrorMessage(error)}`, 'error');
+    } finally {
+      if (button) button.disabled = false;
+    }
+  });
+}
+
 function setupLogin(onUnlock) {
   const loginSection = document.getElementById('admin-login');
   const dashboard = document.getElementById('admin-dashboard');
@@ -391,7 +565,10 @@ function setupLogin(onUnlock) {
 function setupContentForm(formId, collectionName, payloadBuilder, onSuccess) {
   const form = document.getElementById(formId);
   const status = document.querySelector(`[data-status-for="${collectionName}"]`);
-  if (!form || !status) return;
+  if (!form) return;
+  if (!status) {
+    console.warn(`admin.setupContentForm: липсва status елемент за ${collectionName}`);
+  }
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -400,18 +577,18 @@ function setupContentForm(formId, collectionName, payloadBuilder, onSuccess) {
     try {
       payload = payloadBuilder(new FormData(form));
     } catch (error) {
-      setStatus(status, error.message || 'Невалидни данни.', 'error');
+      if (status) setStatus(status, error.message || 'Невалидни данни.', 'error');
       return;
     }
 
     const button = form.querySelector('button[type="submit"]');
     if (button) button.disabled = true;
-    setStatus(status, 'Записване...');
+    if (status) setStatus(status, 'Записване...');
 
     try {
       await addCollectionDoc(collectionName, payload);
       form.reset();
-      setStatus(status, 'Записано успешно.', 'success');
+      if (status) setStatus(status, 'Записано успешно.', 'success');
       if (typeof onSuccess === 'function') {
         try {
           await onSuccess(payload);
@@ -421,7 +598,7 @@ function setupContentForm(formId, collectionName, payloadBuilder, onSuccess) {
       }
     } catch (error) {
       console.error(`Failed to save in ${collectionName}`, error);
-      setStatus(status, `Грешка при запис: ${error.message || 'неизвестна'}`, 'error');
+      if (status) setStatus(status, `Грешка при запис: ${error.message || 'неизвестна'}`, 'error');
     } finally {
       if (button) button.disabled = false;
     }
@@ -589,18 +766,7 @@ function initAdmin() {
     await loadAdminAchievements();
   });
 
-  setupContentForm('consultations-form', 'consultations', form => {
-    const date = trimValue(form.get('date'));
-    const subject = trimValue(form.get('subject'));
-    const teacher = trimValue(form.get('teacher'));
-    const room = trimValue(form.get('room'));
-
-    if (!date || !subject || !teacher || !room) {
-      throw new Error('Попълнете всички полета за консултация.');
-    }
-
-    return { date, subject, teacher, room };
-  });
+  setupParliamentInitiativesForm();
 
   setupContentForm('charity-form', 'charity', form => {
     const year = trimValue(form.get('year'));
