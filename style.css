@@ -115,7 +115,7 @@ a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-right: 100px;
+  margin-right: 50px;
   margin-left: -100px;
 }
 
@@ -155,7 +155,7 @@ a {
 }
 
 .nav-menu li a {
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 0.65rem;
   border-radius: var(--radius-sm);
   font-weight: 500;
   transition: background var(--transition), color var(--transition);
@@ -234,7 +234,7 @@ a {
 }
 
 .section {
-  padding: 1rem 0;
+  padding: 1.7rem 0;
 }
 
 .section:nth-of-type(even) {
@@ -656,10 +656,7 @@ a {
   flex-direction: row-reverse;
 }
 
-.achievement-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
+
 
 .achievement-image {
   flex: 0 0 46%;
@@ -700,10 +697,7 @@ a {
   font-size: 1.1rem;
 }
 
-.achievement-card.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+
 
 .consultation-panel {
   background: var(--color-white);
@@ -865,6 +859,51 @@ a {
 
 .parliament-avatar-chair {
   background: var(--color-primary-dark);
+}
+
+.section-eco-patrol .section-title {
+  margin-bottom: 1rem;
+}
+
+.eco-patrol-description {
+  max-width: 880px;
+  margin: 0 auto 1.75rem;
+  padding: 0.85rem 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius);
+}
+
+.eco-patrol-description p {
+  margin: 0;
+  line-height: 1.8;
+  color: var(--color-gray-600);
+}
+
+.eco-patrol-activities-title {
+  max-width: 750px;
+  margin: 0 auto 1rem;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-weight: 600;
+}
+
+.eco-patrol-content {
+  max-width: 750px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.eco-patrol-note {
+  margin: 0;
+  padding: 0.95rem 1.15rem;
+  background: var(--color-white);
+  border-left: 4px solid var(--color-primary-dark);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  box-shadow: var(--shadow-sm);
+  color: var(--color-gray-700);
+  text-align: justify;
 }
 
 .timeline {
