@@ -307,17 +307,97 @@ function renderCharity(charityItems) {
   timeline.innerHTML = html;
 }
 
+const PARLIAMENT_COLLAPSED_PREVIEW_HEIGHT = 320;
+const ECO_PATROL_COLLAPSED_PREVIEW_HEIGHT = 210;
+let parliamentToggleResizeRaf = null;
+
+function updateParliamentInitiativesToggle() {
+  const collapseRoot = document.getElementById('parliament-initiatives-collapse');
+  const list = document.getElementById('parliament-initiatives-list');
+  const toggleButton = document.getElementById('parliament-initiatives-toggle');
+  if (!collapseRoot || !list || !toggleButton) return;
+
+  collapseRoot.style.setProperty('--parliament-collapsed-height', `${PARLIAMENT_COLLAPSED_PREVIEW_HEIGHT}px`);
+  const keepExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+
+  const needsToggle = list.scrollHeight > PARLIAMENT_COLLAPSED_PREVIEW_HEIGHT + 8;
+  if (!needsToggle) {
+    collapseRoot.classList.add('is-expanded');
+    toggleButton.onclick = null;
+    toggleButton.hidden = true;
+    toggleButton.setAttribute('aria-expanded', 'true');
+    return;
+  }
+
+  collapseRoot.classList.toggle('is-expanded', keepExpanded);
+  toggleButton.hidden = false;
+  toggleButton.textContent = keepExpanded ? 'Скрий инициативите' : 'Покажи всички инициативи';
+  toggleButton.setAttribute('aria-expanded', keepExpanded ? 'true' : 'false');
+
+  toggleButton.onclick = () => {
+    const expanded = collapseRoot.classList.toggle('is-expanded');
+    toggleButton.textContent = expanded ? 'Скрий инициативите' : 'Покажи всички инициативи';
+    toggleButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  };
+}
+
+function updateEcoPatrolToggle() {
+  const collapseRoot = document.getElementById('eco-patrol-collapse');
+  const content = document.getElementById('eco-patrol-content');
+  const toggleButton = document.getElementById('eco-patrol-toggle');
+  if (!collapseRoot || !content || !toggleButton) return;
+
+  collapseRoot.style.setProperty('--parliament-collapsed-height', `${ECO_PATROL_COLLAPSED_PREVIEW_HEIGHT}px`);
+  const keepExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+
+  const needsToggle = content.scrollHeight > ECO_PATROL_COLLAPSED_PREVIEW_HEIGHT + 8;
+  if (!needsToggle) {
+    collapseRoot.classList.add('is-expanded');
+    toggleButton.onclick = null;
+    toggleButton.hidden = true;
+    toggleButton.setAttribute('aria-expanded', 'true');
+    return;
+  }
+
+  collapseRoot.classList.toggle('is-expanded', keepExpanded);
+  toggleButton.hidden = false;
+  toggleButton.textContent = keepExpanded ? 'Скрий дейностите' : 'Покажи всички дейности';
+  toggleButton.setAttribute('aria-expanded', keepExpanded ? 'true' : 'false');
+
+  toggleButton.onclick = () => {
+    const expanded = collapseRoot.classList.toggle('is-expanded');
+    toggleButton.textContent = expanded ? 'Скрий дейностите' : 'Покажи всички дейности';
+    toggleButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  };
+}
+
+function renderParliamentInitiativeCard(item) {
+  const monthText = escapeHtml(normalizeMonthLabel(item?.month));
+  const description = escapeHtml(item?.description || '');
+  const extraInfo = escapeHtml(item?.extra_info || item?.extra || '');
+
+  return `
+    <article class="parliament-initiative-card reveal">
+      <p class="parliament-initiative-month">${monthText}</p>
+      <p class="parliament-initiative-description">${description || 'Без описание'}</p>
+      <p class="parliament-initiative-extra">${extraInfo || 'Няма допълнителна информация.'}</p>
+    </article>
+  `;
+}
+
 function renderParliamentInitiatives(initiativesItems) {
   const list = document.getElementById('parliament-initiatives-list');
   if (!list) return;
 
   if (!Array.isArray(initiativesItems)) {
     setBlockMessage(list, 'Инициативите на парламента не могат да бъдат заредени в момента.', true);
+    updateParliamentInitiativesToggle();
     return;
   }
 
   if (!initiativesItems.length) {
     setBlockMessage(list, 'Все още няма публикувани инициативи на парламента.');
+    updateParliamentInitiativesToggle();
     return;
   }
 
@@ -334,19 +414,40 @@ function renderParliamentInitiatives(initiativesItems) {
     return aMonth.localeCompare(bMonth, 'bg');
   });
 
-  list.innerHTML = sorted.map(item => {
-    const monthText = escapeHtml(normalizeMonthLabel(item.month));
-    const description = escapeHtml(item.description || '');
-    const extraInfo = escapeHtml(item.extra_info || item.extra || '');
+  const firstHalf = [];
+  const secondHalf = [];
+  sorted.forEach(item => {
+    const monthIndex = parseMonthIndex(item?.month);
+    if (monthIndex && monthIndex <= 6) {
+      firstHalf.push(item);
+      return;
+    }
+    secondHalf.push(item);
+  });
 
-    return `
-      <article class="parliament-initiative-card reveal">
-        <p class="parliament-initiative-month">${monthText}</p>
-        <p class="parliament-initiative-description">${description || 'Без описание'}</p>
-        <p class="parliament-initiative-extra">${extraInfo || 'Няма допълнителна информация.'}</p>
-      </article>
-    `;
-  }).join('');
+  list.innerHTML = `
+    <div class="parliament-initiatives-column parliament-initiatives-column--first">
+      ${firstHalf.map(renderParliamentInitiativeCard).join('')}
+    </div>
+    <div class="parliament-initiatives-column parliament-initiatives-column--second">
+      ${secondHalf.map(renderParliamentInitiativeCard).join('')}
+    </div>
+  `;
+
+  updateParliamentInitiativesToggle();
+}
+
+function bindParliamentInitiativesResponsiveToggle() {
+  window.addEventListener('resize', () => {
+    if (parliamentToggleResizeRaf !== null) {
+      cancelAnimationFrame(parliamentToggleResizeRaf);
+    }
+    parliamentToggleResizeRaf = requestAnimationFrame(() => {
+      parliamentToggleResizeRaf = null;
+      updateParliamentInitiativesToggle();
+      updateEcoPatrolToggle();
+    });
+  });
 }
 
 async function fetchCollectionSafe(name) {
@@ -858,6 +959,8 @@ async function init() {
   initScheduleByGrade();
   initSmoothScroll();
   initPodcastButtons();
+  updateEcoPatrolToggle();
+  bindParliamentInitiativesResponsiveToggle();
 
   const eventsByDate = await loadDynamicSections();
   initCalendar(eventsByDate);

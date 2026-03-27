@@ -795,7 +795,7 @@
     <section id="училищен-парламент" class="section section-parliament">
       <div class="container">
         <h2 class="section-title">Училищен парламент</h2>
-        <p class="section-intro">Ученическият съвет – гласът на учениците</p>
+        <p class="section-intro parliament-intro">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quaerat dignissimos tenetur placeat consequuntur perspiciatis nesciunt nulla corporis! Reprehenderit similique exercitationem repellendus aspernatur? Odit nulla deserunt odio dignissimos atque velit?</p>
         <div class="parliament-grid">
           <article class="parliament-card reveal">
             <div class="parliament-avatar parliament-avatar-chair">П</div>
@@ -804,27 +804,34 @@
             <p>Координира дейностите на училищния парламент.</p>
           </article>
           <article class="parliament-card reveal">
-            <div class="parliament-avatar">Ч</div>
-            <h3>Член</h3>
+            <div class="parliament-avatar">З</div>
+            <h3>Заместник Председател</h3>
             <p class="parliament-name">Untitled</p>
-            <p>Отговорен за културните и спортни събития в училището.</p>
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
           </article>
           <article class="parliament-card reveal">
-            <div class="parliament-avatar">Ч</div>
-            <h3>Член</h3>
+            <div class="parliament-avatar">С</div>
+            <h3>Секретар</h3>
             <p class="parliament-name">Untitled</p>
-            <p>Работи по благотворителни инициативи и проекти.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
           </article>
-          <article class="parliament-card reveal">
-            <div class="parliament-avatar">Ч</div>
-            <h3>Член</h3>
-            <p class="parliament-name">Untitled</p>
-            <p>Отговорен за комуникацията и медиите в училището.</p>
-          </article>
+
         </div>
         <div class="parliament-activities-panel">
           <h3 class="parliament-activities-title">Дейности на парламента</h3>
-          <div id="parliament-initiatives-list" class="parliament-initiatives-grid"></div>
+          <div id="parliament-initiatives-collapse" class="parliament-initiatives-collapse">
+            <div id="parliament-initiatives-list" class="parliament-initiatives-grid"></div>
+          </div>
+          <button
+            id="parliament-initiatives-toggle"
+            class="parliament-initiatives-toggle"
+            type="button"
+            aria-controls="parliament-initiatives-collapse"
+            aria-expanded="false"
+            hidden
+          >
+            Покажи всички дейности
+          </button>
         </div>
       </div>
     </section>
@@ -836,14 +843,26 @@
           <p>„Еко патрул“ е ученическа инициатива, насочена към поддържането на чиста, безопасна и приятна училищна среда. Участниците се включват активно в дейности за опазване на училищната база и околната среда, както и в различни училищни инициативи. Чрез своето участие учениците развиват чувство за отговорност, работа в екип и активна гражданска позиция. Инициативата насърчава екологичното мислене и сътрудничеството между учениците.</p>
         </div>
         <h3 class="eco-patrol-activities-title">Основни дейности</h3>
-        <div class="eco-patrol-content reveal">
-          <p class="eco-patrol-note">Подпомагане на чистотата и реда в училищната база, вътрешния двор и зелените площи около училището.</p>
-          <p class="eco-patrol-note">Участие в екоинициативи, кампании и доброволчески дейности за опазване на околната среда.</p>
-          <p class="eco-patrol-note">Съдействие при организацията на училищни събития за поддържане на добър ред и спокойна атмосфера.</p>
-          <p class="eco-patrol-note">Включване в образователни и превенционни кампании по теми като здравословен начин на живот, емоционална интелигентност, безопасно поведение и отговорно общуване.</p>
-          <p class="eco-patrol-note">Провеждане на дейности за обучение на връстници и споделяне на добри практики между учениците.</p>
-          <p class="eco-patrol-note">Чрез участието си учениците развиват работа в екип, инициативност, отговорност и активна гражданска позиция, като допринасят за по-добра училищна среда.</p>
+        <div id="eco-patrol-collapse" class="parliament-initiatives-collapse eco-patrol-collapse">
+          <div id="eco-patrol-content" class="eco-patrol-content reveal">
+            <p class="eco-patrol-note">Подпомагане на чистотата и реда в училищната база, вътрешния двор и зелените площи около училището.</p>
+            <p class="eco-patrol-note">Участие в екоинициативи, кампании и доброволчески дейности за опазване на околната среда.</p>
+            <p class="eco-patrol-note">Съдействие при организацията на училищни събития за поддържане на добър ред и спокойна атмосфера.</p>
+            <p class="eco-patrol-note">Включване в образователни и превенционни кампании по теми като здравословен начин на живот, емоционална интелигентност, безопасно поведение и отговорно общуване.</p>
+            <p class="eco-patrol-note">Провеждане на дейности за обучение на връстници и споделяне на добри практики между учениците.</p>
+            <p class="eco-patrol-note">Чрез участието си учениците развиват работа в екип, инициативност, отговорност и активна гражданска позиция, като допринасят за по-добра училищна среда.</p>
+          </div>
         </div>
+        <button
+          id="eco-patrol-toggle"
+          class="parliament-initiatives-toggle eco-patrol-toggle"
+          type="button"
+          aria-controls="eco-patrol-collapse"
+          aria-expanded="false"
+          hidden
+        >
+          Покажи всички дейности
+        </button>
       </div>
     </section>
     <!-- ========== БЛАГОТВОРИТЕЛНИ ИНИЦИАТИВИ ========== -->
@@ -871,7 +890,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Втора Английска Езикова Гимназия. Всички права запазени.</p>
+        <p>&copy; 2026 Втора Английска Езикова Гимназия.</p>
       </div>
     </div>
   </footer>

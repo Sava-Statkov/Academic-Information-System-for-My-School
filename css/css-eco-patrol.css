@@ -32,6 +32,17 @@
   gap: 0.85rem;
 }
 
+.eco-patrol-collapse {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.eco-patrol-toggle {
+  max-width: 750px;
+  margin: 1rem auto 0;
+  display: block;
+}
+
 .eco-patrol-note {
   margin: 0;
   padding: 0.95rem 1.15rem;
