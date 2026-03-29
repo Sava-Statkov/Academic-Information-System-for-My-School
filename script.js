@@ -260,14 +260,26 @@ function renderConsultations(consultationsItems) {
 
 function renderCharity(charityItems) {
   const timeline = document.getElementById('charity-timeline');
+  const yearFilter = document.getElementById('charity-year-filter');
   if (!timeline) return;
 
+  function clearYearFilterUi() {
+    if (!yearFilter) return;
+    if (yearFilter._charityDocClickHandler) {
+      document.removeEventListener('click', yearFilter._charityDocClickHandler);
+      yearFilter._charityDocClickHandler = null;
+    }
+    yearFilter.innerHTML = '';
+  }
+
   if (!Array.isArray(charityItems)) {
+    clearYearFilterUi();
     setBlockMessage(timeline, 'Инициативите не могат да бъдат заредени в момента.', true);
     return;
   }
 
   if (!charityItems.length) {
+    clearYearFilterUi();
     setBlockMessage(timeline, 'Все още няма публикувани благотворителни инициативи.');
     return;
   }
@@ -288,8 +300,41 @@ function renderCharity(charityItems) {
     return b.localeCompare(a, 'bg');
   });
 
-  const html = years.map(year => {
+  const defaultYear = years[0];
+  if (yearFilter) {
+    yearFilter.innerHTML = `
+      <div class="charity-year-filter-box charity-year-dropdown" data-charity-year-dropdown>
+        <button
+          type="button"
+          class="charity-year-dropdown-trigger"
+          data-charity-year-trigger
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          Избери година
+        </button>
+        <ul class="charity-year-dropdown-menu" data-charity-year-menu role="listbox">
+          ${years.map(year => `
+            <li>
+              <button
+                type="button"
+                class="charity-year-dropdown-option"
+                data-year-filter="${escapeHtml(year)}"
+                role="option"
+                aria-selected="false"
+              >
+                ${escapeHtml(year)}
+              </button>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  const html = years.map((year, index) => {
     const items = groups.get(year) || [];
+    const panelId = `charity-year-panel-${index + 1}`;
     const cards = items.map(item => `
       <article class="timeline-item reveal">
         <div class="timeline-marker"></div>
@@ -301,10 +346,113 @@ function renderCharity(charityItems) {
       </article>
     `).join('');
 
-    return `<h3 class="charity-year-title">${escapeHtml(year)}</h3>${cards}`;
+    return `
+      <section class="charity-year-group" data-charity-year="${escapeHtml(year)}" hidden>
+        <div class="charity-year-header">
+          <h3 class="charity-year-title">${escapeHtml(year)}</h3>
+        </div>
+        <div id="${panelId}" class="charity-year-items">
+          ${cards}
+        </div>
+        <button
+          type="button"
+          class="charity-year-toggle parliament-initiatives-toggle"
+          aria-controls="${panelId}"
+          aria-expanded="true"
+        >
+          Скрий инициативите
+        </button>
+      </section>
+    `;
   }).join('');
 
   timeline.innerHTML = html;
+
+  const yearGroups = [...timeline.querySelectorAll('[data-charity-year]')];
+  const yearButtons = yearFilter ? [...yearFilter.querySelectorAll('[data-year-filter]')] : [];
+  const yearDropdownRoot = yearFilter?.querySelector('[data-charity-year-dropdown]');
+  const yearDropdownTrigger = yearFilter?.querySelector('[data-charity-year-trigger]');
+  const yearDropdownMenu = yearFilter?.querySelector('[data-charity-year-menu]');
+  const yearToggles = [...timeline.querySelectorAll('.charity-year-toggle')];
+
+  function closeYearDropdown() {
+    if (!yearDropdownMenu || !yearDropdownTrigger) return;
+    yearDropdownRoot?.classList.remove('is-open');
+    yearDropdownTrigger.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleYearDropdown() {
+    if (!yearDropdownMenu || !yearDropdownTrigger) return;
+    const nextOpen = !yearDropdownRoot?.classList.contains('is-open');
+    yearDropdownRoot?.classList.toggle('is-open', nextOpen);
+    yearDropdownTrigger.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+  }
+
+  function activateYear(year) {
+    yearGroups.forEach(group => {
+      const isTarget = group.getAttribute('data-charity-year') === year;
+      group.hidden = !isTarget;
+    });
+    yearButtons.forEach(button => {
+      const isActive = button.getAttribute('data-year-filter') === year;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+  }
+
+  if (yearDropdownTrigger) {
+    yearDropdownTrigger.addEventListener('click', () => {
+      toggleYearDropdown();
+    });
+  }
+
+  if (yearFilter) {
+    yearFilter.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        closeYearDropdown();
+      }
+    });
+  }
+
+  if (yearFilter?._charityDocClickHandler) {
+    document.removeEventListener('click', yearFilter._charityDocClickHandler);
+    yearFilter._charityDocClickHandler = null;
+  }
+
+  if (yearDropdownRoot && yearFilter) {
+    yearFilter._charityDocClickHandler = event => {
+      if (!yearDropdownRoot.contains(event.target)) {
+        closeYearDropdown();
+      }
+    };
+    document.addEventListener('click', yearFilter._charityDocClickHandler);
+  }
+
+  yearButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const year = button.getAttribute('data-year-filter');
+      if (!year) return;
+      activateYear(year);
+      closeYearDropdown();
+    });
+  });
+
+  yearToggles.forEach(button => {
+    button.addEventListener('click', () => {
+      const panelId = button.getAttribute('aria-controls');
+      if (!panelId) return;
+      const panel = document.getElementById(panelId);
+      if (!panel) return;
+
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      const nextExpanded = !expanded;
+      panel.hidden = !nextExpanded;
+      button.setAttribute('aria-expanded', nextExpanded ? 'true' : 'false');
+      button.textContent = nextExpanded ? 'Скрий инициативите' : 'Покажи инициативите';
+    });
+  });
+
+  activateYear(defaultYear);
 }
 
 const PARLIAMENT_COLLAPSED_PREVIEW_HEIGHT = 320;

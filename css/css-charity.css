@@ -1,3 +1,137 @@
+.charity-year-filter {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: max(0px, calc(50% - 580px));
+  margin: 0 0 1.2rem;
+}
+
+.charity-year-filter-box {
+  width: 25%;
+  background: var(--color-white);
+  border: 1px solid rgba(11, 60, 93, 0.18);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.09);
+  padding: 0.78rem;
+  overflow: visible;
+}
+
+.charity-year-dropdown {
+  position: relative;
+}
+
+.charity-year-dropdown-trigger {
+  width: 100%;
+  border: 1px solid rgba(11, 60, 93, 0.24);
+  border-radius: 10px;
+  background: linear-gradient(145deg, #f9fbff, #edf4fc);
+  color: var(--color-primary-dark);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  min-height: 52px;
+  padding: 0.9rem 1rem 0.9rem 1rem;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transition: transform 160ms ease, border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.charity-year-dropdown-trigger::after {
+  content: '\25BE';
+  position: absolute;
+  right: 0.92rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  transition: transform 180ms ease;
+}
+
+.charity-year-dropdown-trigger:hover,
+.charity-year-dropdown-trigger:focus-visible {
+  border-color: rgba(11, 60, 93, 0.45);
+  background: linear-gradient(145deg, #ffffff, #eaf2fb);
+  box-shadow: 0 8px 16px rgba(11, 60, 93, 0.14);
+}
+
+.charity-year-dropdown-trigger:active {
+  transform: translateY(1px);
+}
+
+.charity-year-dropdown.is-open .charity-year-dropdown-trigger {
+  border-color: rgba(11, 60, 93, 0.45);
+  box-shadow: 0 8px 16px rgba(11, 60, 93, 0.14);
+}
+
+.charity-year-dropdown.is-open .charity-year-dropdown-trigger::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.charity-year-dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0.42rem;
+  border: 1px solid rgba(11, 60, 93, 0.18);
+  border-radius: 12px;
+  background: var(--color-white);
+  box-shadow: 0 14px 26px rgba(15, 23, 42, 0.16);
+  max-height: 260px;
+  overflow-y: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  z-index: 18;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+}
+
+.charity-year-dropdown.is-open .charity-year-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.charity-year-dropdown-menu li + li {
+  margin-top: 0.24rem;
+}
+
+.charity-year-dropdown-option {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.25;
+  min-height: 42px;
+  padding: 0.56rem 0.72rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition), transform 120ms ease;
+}
+
+.charity-year-dropdown-option:hover,
+.charity-year-dropdown-option:focus-visible {
+  border-color: var(--color-primary);
+  background: #eef4fb;
+  transform: translateX(2px);
+}
+
+.charity-year-dropdown-option.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+}
+
 .timeline {
   position: relative;
   padding-left: 2rem;
@@ -46,4 +180,36 @@
   margin: 0 0 1rem;
   color: var(--color-primary);
   font-size: 1.3rem;
+}
+
+.charity-year-group[hidden] {
+  display: none;
+}
+
+.charity-year-header {
+  margin-bottom: 0.85rem;
+}
+
+.charity-year-header .charity-year-title {
+  margin: 0;
+}
+
+.charity-year-toggle {
+  width: auto;
+  margin: 0.25rem 0 1.15rem 0;
+  padding: 0.6rem 1rem;
+  font-size: 0.88rem;
+  border-radius: 10px;
+  display: block;
+}
+
+.charity-year-items[hidden] {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .charity-year-filter {
+    padding-left: 0;
+    width: 100%;
+  }
 }
