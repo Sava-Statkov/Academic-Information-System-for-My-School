@@ -81,11 +81,18 @@
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
   color: var(--color-gray-600);
-  text-align: center;
+  text-align: justify;
 }
 
 .section-message--error {
   border-color: #f2a7a7;
   background: #fff3f3;
   color: #8e2323;
+}
+
+#events-cards > .section-message {
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-width: 320px;
+  margin: 0.95rem auto 1.25rem;
 }

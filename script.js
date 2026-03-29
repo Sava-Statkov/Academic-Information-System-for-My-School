@@ -331,12 +331,12 @@ function updateParliamentInitiativesToggle() {
 
   collapseRoot.classList.toggle('is-expanded', keepExpanded);
   toggleButton.hidden = false;
-  toggleButton.textContent = keepExpanded ? 'Скрий инициативите' : 'Покажи всички инициативи';
+  toggleButton.textContent = keepExpanded ? 'Скрий дейностите' : 'Покажи всички дейности';
   toggleButton.setAttribute('aria-expanded', keepExpanded ? 'true' : 'false');
 
   toggleButton.onclick = () => {
     const expanded = collapseRoot.classList.toggle('is-expanded');
-    toggleButton.textContent = expanded ? 'Скрий инициативите' : 'Покажи всички инициативи';
+    toggleButton.textContent = expanded ? 'Скрий дейностите' : 'Покажи всички дейности';
     toggleButton.setAttribute('aria-expanded', expanded ? 'true' : 'false');
   };
 }
