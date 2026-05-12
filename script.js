@@ -455,9 +455,32 @@ function renderCharity(charityItems) {
   activateYear(defaultYear);
 }
 
-const PARLIAMENT_COLLAPSED_PREVIEW_HEIGHT = 320;
-const ECO_PATROL_COLLAPSED_PREVIEW_HEIGHT = 210;
 let parliamentToggleResizeRaf = null;
+
+function getRowGap(element) {
+  const styles = window.getComputedStyle(element);
+  const parsedGap = parseFloat(styles.rowGap || styles.gap);
+  return Number.isFinite(parsedGap) ? parsedGap : 0;
+}
+
+function getOneAndHalfPreviewHeight(container) {
+  const items = Array.from(container.children).filter(item => item.getBoundingClientRect().height > 0);
+  if (items.length < 2) return container.scrollHeight;
+
+  const firstHeight = items[0].getBoundingClientRect().height;
+  const secondHeight = items[1].getBoundingClientRect().height;
+  return Math.ceil(firstHeight + getRowGap(container) + (secondHeight / 2));
+}
+
+function getParliamentPreviewHeight(list) {
+  const columns = Array.from(list.querySelectorAll('.parliament-initiatives-column'));
+  const previewHeights = columns
+    .filter(column => column.children.length >= 2)
+    .map(getOneAndHalfPreviewHeight);
+
+  if (!previewHeights.length) return list.scrollHeight;
+  return Math.min(...previewHeights);
+}
 
 function updateParliamentInitiativesToggle() {
   const collapseRoot = document.getElementById('parliament-initiatives-collapse');
@@ -465,10 +488,11 @@ function updateParliamentInitiativesToggle() {
   const toggleButton = document.getElementById('parliament-initiatives-toggle');
   if (!collapseRoot || !list || !toggleButton) return;
 
-  collapseRoot.style.setProperty('--parliament-collapsed-height', `${PARLIAMENT_COLLAPSED_PREVIEW_HEIGHT}px`);
-  const keepExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+  const collapsedHeight = getParliamentPreviewHeight(list);
+  collapseRoot.style.setProperty('--parliament-collapsed-height', `${collapsedHeight}px`);
+  const keepExpanded = !toggleButton.hidden && toggleButton.getAttribute('aria-expanded') === 'true';
 
-  const needsToggle = list.scrollHeight > PARLIAMENT_COLLAPSED_PREVIEW_HEIGHT + 8;
+  const needsToggle = list.scrollHeight > collapsedHeight + 8;
   if (!needsToggle) {
     collapseRoot.classList.add('is-expanded');
     toggleButton.onclick = null;
@@ -495,10 +519,11 @@ function updateEcoPatrolToggle() {
   const toggleButton = document.getElementById('eco-patrol-toggle');
   if (!collapseRoot || !content || !toggleButton) return;
 
-  collapseRoot.style.setProperty('--parliament-collapsed-height', `${ECO_PATROL_COLLAPSED_PREVIEW_HEIGHT}px`);
-  const keepExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+  const collapsedHeight = getOneAndHalfPreviewHeight(content);
+  collapseRoot.style.setProperty('--parliament-collapsed-height', `${collapsedHeight}px`);
+  const keepExpanded = !toggleButton.hidden && toggleButton.getAttribute('aria-expanded') === 'true';
 
-  const needsToggle = content.scrollHeight > ECO_PATROL_COLLAPSED_PREVIEW_HEIGHT + 8;
+  const needsToggle = content.scrollHeight > collapsedHeight + 8;
   if (!needsToggle) {
     collapseRoot.classList.add('is-expanded');
     toggleButton.onclick = null;

@@ -134,13 +134,7 @@
   background-image: url('../images/aeg.png');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.4);
-}
-
-.banner-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(11, 60, 93, 0.12), rgba(11, 60, 93, 0.55));
+  filter: brightness(0.9);
 }
 
 .banner-content {

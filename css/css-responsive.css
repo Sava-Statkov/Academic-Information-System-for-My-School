@@ -32,6 +32,17 @@
 }
 
 @media (max-width: 768px) {
+  .school-intro-grid {
+    grid-template-columns: 1fr;
+  }
+  .school-intro-copy {
+    padding-left: 1rem;
+  }
+  .school-intro-media {
+    max-width: 420px;
+    width: 100%;
+    justify-self: center;
+  }
   .schedule-select-row {
     flex-direction: column;
   }
@@ -52,6 +63,10 @@
     flex-direction: column;
   }
   .footer-grid {
+    grid-template-columns: 1fr;
     text-align: center;
+  }
+  .footer-column:last-child {
+    justify-self: center;
   }
 }

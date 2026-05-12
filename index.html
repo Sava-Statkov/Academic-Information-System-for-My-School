@@ -50,11 +50,23 @@
       <div class="banner" id="начало">
         <div class="banner-overlay"></div>
         <div class="banner-content layout-container">
-          <h1>Втора английска езикова гимназия</h1>
+          <!-- <h1>Втора английска езикова гимназия</h1> -->
         </div>
       </div>
     </header>
     <main class="main-content">
+      <!-- ========== ЗА УЧИЛИЩЕТО ========== -->
+      <section class="school-intro" aria-labelledby="school-intro-title">
+        <div class="layout-container school-intro-grid">
+          <div class="school-intro-copy">
+            <h2 id="school-intro-title">Втора английска езикова гимназия „Томас Джеферсън”</h2>
+            <p><br>2 АЕГ „Томас Джеферсън” е профилирана столична гимназия с петгодишен курс на обучение и интензивно изучаване на английски език.</p>
+          </div>
+          <div class="school-intro-media">
+            <img src="images/thomas.png" alt="Портрет на Томас Джеферсън" class="school-intro-image">
+          </div>
+        </div>
+      </section>
       <div class="layout-container">
         <!-- ========== СЕДМИЧНА ПРОГРАМА ========== -->
         <section id="седмична-програма" class="section section-schedule">
@@ -63,7 +75,7 @@
             <p class="section-intro">Учебната програма за учебната седмица</p>
 
         <div class="schedule-selector-box">
-          <p class="schedule-selector-intro">Тук можете да прегледате седмичната програма по класове и паралелки. Изберете паралелка от съответния випуск, за да видите нейната учебна програма.</p>
+          <p class="schedule-selector-intro">Тук можете да прегледате седмичната програма по класове и паралелки.</p>
 
           <div class="schedule-select-row" aria-label="Избор на клас и паралелка">
             <!-- 8 клас -->
@@ -795,7 +807,7 @@
     <section id="училищен-парламент" class="section section-parliament">
       <div class="container">
         <h2 class="section-title">Училищен парламент</h2>
-        <p class="section-intro parliament-intro">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quaerat dignissimos tenetur placeat consequuntur perspiciatis nesciunt nulla corporis! Reprehenderit similique exercitationem repellendus aspernatur? Odit nulla deserunt odio dignissimos atque velit?</p>
+        <p class="section-intro parliament-intro">Осигуряване на трибуна за участието на учениците в демократизацията на учебно-възпитателния процес и осигуряване на равни възможности за придобиване на желаното от тях качествено образование.</p>
         <div class="parliament-grid">
           <article class="parliament-card reveal">
             <div class="parliament-avatar parliament-avatar-chair">П</div>
@@ -880,16 +892,16 @@
   <!-- ========== FOOTER ========== -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-block">
-          <address>
-            <p><strong>Адрес:</strong><br>ж.к. Стрелбище, ул. „Траянова врата”, София</p>
-            <p><strong>Телефон:</strong><br>+359 888 19 24 59</p>
-            <p><strong>Facebook:</strong><br>Втора Английска Езикова Гимназия<br>„Томас Джеферсън“</p>
-            <p><strong>Email:</strong><br>2els.Sofia@2els.com</p>
-          </address>
+      <address class="footer-grid" aria-label="Контакти">
+        <div class="footer-column">
+          <p class="footer-item"><strong>Адрес:</strong> ж.к. Стрелбище, ул. „Траянова врата“ 26, 1408 София</p>
+          <p class="footer-item"><strong>Телефон:</strong>+359 888 19 24 59</p>
         </div>
-      </div>
+        <div class="footer-column">
+          <p class="footer-item"><strong>Facebook:</strong>Втора Английска Езикова Гимназия „Томас Джеферсън“</p>
+          <p class="footer-item"><strong>Email:</strong>2els.Sofia@2els.com</p>
+        </div>
+      </address>
       <div class="footer-bottom">
         <p>&copy; 2026 Втора Английска Езикова Гимназия.</p>
       </div>

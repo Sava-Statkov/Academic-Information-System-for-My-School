@@ -23,5 +23,6 @@
 }
 
 .parliament-intro {
+  max-width: 640px;
   text-align: justify!important;
 }
